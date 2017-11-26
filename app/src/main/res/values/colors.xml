@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFEFF</color>
+    <color name="timber_green">#112c2e</color>
+    <color name="faded_cyan">#85FBFB</color>
+    <color name="trout">#526768</color>
 </resources>

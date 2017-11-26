@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +31,6 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".activity.LoadingActivity"
             android:screenOrientation="landscape">
@@ -40,6 +40,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.HuiYiActivity" />
+        <activity android:name=".activity.RenJiActivity" />
+        <activity android:name=".activity.JiQiRenActivity" />
+        <activity android:name=".activity.ZhuCeActivity" />
+        <activity android:name=".activity.GuanLiYuanActivity"></activity>
     </application>
 
 </manifest>

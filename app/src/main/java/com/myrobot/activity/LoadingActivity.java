@@ -22,6 +22,7 @@ public class LoadingActivity extends BaseActivity {
             @Override
             public void run() {
                 startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+                finish();
             }
         }, 20000);
     }

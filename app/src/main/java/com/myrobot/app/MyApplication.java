@@ -2,11 +2,8 @@ package com.myrobot.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Intent;
 
-import com.jpble.ble.BLEService;
-import com.jpble.ble.LinkBLE;
-import com.jpble.utils.SpUtils;
+import com.myrobot.utils.SpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +25,7 @@ public class MyApplication extends Application {
      */
     public boolean isBind = false;
     public String bindMac;
-    private LinkBLE linkBLE;
+
 
 
     /**
@@ -44,12 +41,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        linkBLE = new LinkBLE(this);
+
         SpUtils.init(this);
-        //启动服务的Intent
-        Intent gattServiceIntent = new Intent(this, BLEService.class);
-        //启动服务
-        startService(gattServiceIntent);
 
     }
 
@@ -85,16 +78,5 @@ public class MyApplication extends Application {
             }
         }
 
-    }
-
-    /**
-     * 获取蓝牙管理器对象
-     */
-    public LinkBLE getBleManager() {
-        return linkBLE;
-    }
-
-    private String getdata(int id) {
-        return getResources().getString(id);
     }
 }
