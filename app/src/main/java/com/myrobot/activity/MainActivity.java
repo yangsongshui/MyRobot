@@ -26,8 +26,6 @@ public class MainActivity extends BaseActivity {
     protected void init() {
 
     }
-
-
     @OnClick({R.id.login_bt, R.id.zhuche_bt, R.id.main_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -39,6 +37,8 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.main_back:
                 finish();
+                break;
+            default:
                 break;
         }
     }

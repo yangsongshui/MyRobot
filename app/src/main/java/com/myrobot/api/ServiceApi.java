@@ -12,6 +12,6 @@ import retrofit2.http.Query;
  */
 public interface ServiceApi {
     //天气查询接口
-    @POST("9-2?showapi_appid=40725&showapi_sign=af0b4f5fee3e41169842eb6093b693f4")
-    Call<Weather> getWeather(@Query("area") String address, @Query("needIndex") String needMoreDay);
+    @POST("109-35?showapi_appid=51436&showapi_sign=925d1f706dca48da876547c5fcf518cc")
+    Call<Weather> getNesw(@Query("title") String title);
 }

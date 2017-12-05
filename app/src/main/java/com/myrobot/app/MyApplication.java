@@ -3,6 +3,7 @@ package com.myrobot.app;
 import android.app.Activity;
 import android.app.Application;
 
+import com.myrobot.utils.AppContextUtil;
 import com.myrobot.utils.SpUtils;
 
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
+        //HstApplication.initHstApplication(this);
+        AppContextUtil.init(this);
         SpUtils.init(this);
 
     }
