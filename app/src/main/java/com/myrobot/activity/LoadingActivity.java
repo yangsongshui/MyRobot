@@ -24,6 +24,6 @@ public class LoadingActivity extends BaseActivity {
                 startActivity(new Intent(LoadingActivity.this, MainActivity.class));
                 finish();
             }
-        }, 20000);
+        }, 3000);
     }
 }
