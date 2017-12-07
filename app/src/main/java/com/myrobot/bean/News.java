@@ -281,8 +281,63 @@ public class News {
                     public void setUrl(String url) {
                         this.url = url;
                     }
+
+                    @Override
+                    public String toString() {
+                        return "ImageurlsBean{" +
+                                "height=" + height +
+                                ", width=" + width +
+                                ", url='" + url + '\'' +
+                                '}';
+                    }
+                }
+
+                @Override
+                public String toString() {
+                    return "ContentlistBean{" +
+                            "id='" + id + '\'' +
+                            ", havePic=" + havePic +
+                            ", pubDate='" + pubDate + '\'' +
+                            ", title='" + title + '\'' +
+                            ", channelName='" + channelName + '\'' +
+                            ", desc='" + desc + '\'' +
+                            ", source='" + source + '\'' +
+                            ", channelId='" + channelId + '\'' +
+                            ", nid='" + nid + '\'' +
+                            ", link='" + link + '\'' +
+                            ", hasAll=" + hasAll +
+                            ", imageurls=" + imageurls +
+                            '}';
                 }
             }
+
+            @Override
+            public String toString() {
+                return "PagebeanBean{" +
+                        "allPages=" + allPages +
+                        ", currentPage=" + currentPage +
+                        ", allNum=" + allNum +
+                        ", maxResult=" + maxResult +
+                        ", contentlist=" + contentlist +
+                        '}';
+            }
         }
+
+        @Override
+        public String toString() {
+            return "ShowapiResBodyBean{" +
+                    "ret_code=" + ret_code +
+                    ", pagebean=" + pagebean +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "showapi_res_code=" + showapi_res_code +
+                ", showapi_res_error='" + showapi_res_error + '\'' +
+                ", showapi_res_body=" + showapi_res_body +
+                '}';
     }
 }

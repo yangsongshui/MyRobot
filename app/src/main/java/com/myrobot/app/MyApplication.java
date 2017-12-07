@@ -3,6 +3,8 @@ package com.myrobot.app;
 import android.app.Activity;
 import android.app.Application;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.myrobot.utils.AppContextUtil;
 import com.myrobot.utils.SpUtils;
 
@@ -68,7 +70,12 @@ public class MyApplication extends Application {
             activitiesList.remove(activity);
         }
     }
+    public RequestManager getGlide() {
 
+        return Glide.with(this);
+
+
+    }
     /**
      * 程序退出
      */
