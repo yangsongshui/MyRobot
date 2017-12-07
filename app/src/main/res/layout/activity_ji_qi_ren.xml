@@ -147,11 +147,11 @@
                     android:id="@+id/zhongxin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_centerInParent="true"
                     android:src="@drawable/zhongxin" />
 
                 <Button
+                    android:id="@+id/shang_bt"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_above="@+id/zhongxin"
@@ -159,6 +159,7 @@
                     android:background="@drawable/shang_bt" />
 
                 <Button
+                    android:id="@+id/zuo_bt"
                     android:layout_width="300dp"
                     android:layout_height="150dp"
                     android:layout_centerVertical="true"
@@ -166,6 +167,7 @@
                     android:background="@drawable/zuo_bt" />
 
                 <Button
+                    android:id="@+id/you_bt"
                     android:layout_width="300dp"
                     android:layout_height="150dp"
                     android:layout_centerVertical="true"
@@ -173,6 +175,7 @@
                     android:background="@drawable/you_bt" />
 
                 <Button
+                    android:id="@+id/xia_bt"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_below="@+id/zhongxin"
@@ -194,12 +197,14 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/fanhui_bt"
             android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/fanhui_bt" />
 
         <Button
+            android:id="@+id/home_bt"
             android:layout_width="40dp"
             android:layout_height="60dp"
             android:background="@drawable/home_bt" />

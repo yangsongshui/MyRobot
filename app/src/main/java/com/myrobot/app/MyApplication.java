@@ -42,7 +42,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        //HstApplication.initHstApplication(this);
         AppContextUtil.init(this);
         SpUtils.init(this);
 

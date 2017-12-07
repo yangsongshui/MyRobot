@@ -41,11 +41,14 @@ public class HomeActivity extends BaseActivity {
                 startActivity(new Intent(this, JiQiRenActivity.class));
                 break;
             case R.id.shangwu_bt:
+                startActivity(new Intent(this,ShangWuActivity.class));
                 break;
             case R.id.qiye_bt:
                 break;
             case R.id.yonghu_bt:
                 startActivity(new Intent(this, GuanLiYuanActivity.class));
+                break;
+            default:
                 break;
         }
     }

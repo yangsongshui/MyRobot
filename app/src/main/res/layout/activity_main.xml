@@ -133,8 +133,6 @@
             android:text="手机号"
             android:textColor="@color/white"
             android:textSize="35sp" />
-
-
     </RelativeLayout>
     <ImageView
         android:id="@+id/main_back"
