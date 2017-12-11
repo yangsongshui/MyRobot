@@ -4,62 +4,101 @@
     android:id="@+id/activity_ren_ji"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_bg"
+    android:background="@drawable/renji_n"
     tools:context="com.myrobot.activity.RenJiActivity">
 
 
     <LinearLayout
+        android:id="@+id/sousuo_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/renji_bg"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="550dp"
+        android:background="@drawable/shangwu_et"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical">
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/renji_et"
+            android:layout_width="1000dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:background="@drawable/ed_bg"
             android:hint="在此输入搜索内容"
-            android:textColorHint="@color/trout" />
+            android:maxLines="1"
+            android:paddingStart="15dp"
+            android:textSize="45sp" />
 
         <Button
+            android:id="@+id/yuyin_bt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/sousuo_bt" />
+            android:layout_marginStart="12dp"
+            android:background="@drawable/fangdajing_bt" />
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/luyin" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:layout_below="@id/sousuo_ll"
+        android:gravity="center">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/luyin2" />
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="450dp"
+            android:layout_height="450dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+             />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/luyin1" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/luyin3" />
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/luyin1" />
 
-    <ImageView
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/luyin3" />
+
+        <ImageView
+            android:id="@+id/image4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/luyin4" />
+    </RelativeLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/luyin4" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="140dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/fanhui_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/fanhui_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/fanhui_bt" />
+
+        <Button
+            android:id="@+id/home_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_bt" />
+    </LinearLayout>
 </RelativeLayout>

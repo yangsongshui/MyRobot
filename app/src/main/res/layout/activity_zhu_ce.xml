@@ -11,149 +11,148 @@
 
     <RelativeLayout
         android:id="@+id/rl"
-        android:layout_width="wrap_content"
-        android:layout_height="650dp"
-        android:layout_centerInParent="true">
+        android:layout_width="1800dp"
+        android:layout_height="1050dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/kuang">
+
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/kuang" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="35dp"
             android:src="@drawable/zhuce" />
 
-
         <LinearLayout
-            android:id="@+id/ed_ll"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="130dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/phone_et"
-                android:layout_width="650dp"
+            <LinearLayout
+                android:id="@+id/ed_ll"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/phone"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
                 android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="center"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textSize="35sp" />
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/phone_et"
+                    android:layout_width="650dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/phone"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="35sp" />
 
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ed_ll"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="24dp"
-            android:layout_toEndOf="@+id/ed_ll"
-            android:text="手机号"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ed_ll"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_toEndOf="@+id/ed_ll"
+                    android:text="手机号"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
 
-        <LinearLayout
-            android:id="@+id/ed_ll3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/ed_ll"
-            android:layout_below="@+id/ed_ll"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="400dp"
-                android:layout_height="90dp"
-                android:background="@drawable/yanzhengma"
+
+            <LinearLayout
+                android:id="@+id/ed_ll3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:maxLines="1"
-                android:textSize="35sp"
-                android:inputType="textPassword"
-                android:maxLength="6" />
+                android:layout_marginEnd="70dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="170dp"
-                android:layout_height="50dp"
-                android:background="@drawable/huoqu"
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yanzhengma"
+                    android:gravity="center"
+                    android:inputType="textPassword"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:textSize="65sp" />
+
+                <TextView
+                    android:layout_width="180dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/huoqu"
+                    android:gravity="center"
+                    android:text="获取验证码"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ed_ll2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="30dp"
                 android:gravity="center"
-                android:text="获取验证码"
-                android:layout_marginStart="15dp"
-                android:textColor="@color/white"
-                android:textSize="25dp" />
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/ed_ll2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/ed_ll3"
-            android:layout_below="@+id/ed_ll3"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/psw_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/psw"
+                    android:gravity="center"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:maxLines="1"
+                    android:textSize="35sp" />
 
-            <EditText
-                android:id="@+id/psw_et"
-                android:layout_width="550dp"
-                android:layout_height="100dp"
-                android:background="@drawable/psw"
-                android:gravity="center"
-                android:inputType="textPassword"
-                android:maxLength="16"
-                android:maxLines="1"
-                android:textSize="35sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="输入密码"
+                    android:textColor="@color/white"
+                    android:textSize="35sp" />
+            </LinearLayout>
 
-            <TextView
+
+            <Button
+                android:id="@+id/zhuche_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="输入密码"
-                android:textColor="@color/white"
-                android:textSize="35sp" />
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/zhuce_bt"
+                android:gravity="center"
+                android:text="注册"
+                android:textColor="@color/timber_green"
+                android:textSize="40dp" />
         </LinearLayout>
-
-
-        <Button
-            android:id="@+id/zhuche_bt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ed_ll2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/zhuce_bt"
-            android:gravity="center"
-            android:text="注册"
-            android:textColor="@color/timber_green"
-            android:textSize="40dp" />
-
     </RelativeLayout>
 
 
     <ImageView
         android:id="@+id/zhuche_back"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/rl"
         android:layout_alignEnd="@+id/rl"
-        android:layout_marginBottom="-70dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginBottom="-100dp"
+        android:layout_marginEnd="100dp"
         android:src="@drawable/back" />
+
 </RelativeLayout>

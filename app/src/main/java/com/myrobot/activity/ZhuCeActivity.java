@@ -23,12 +23,15 @@ public class ZhuCeActivity extends BaseActivity {
 
     @OnClick({R.id.zhuche_back, R.id.zhuche_bt})
     public void onViewClicked(View view) {
+        play();
         switch (view.getId()) {
             case R.id.zhuche_back:
                 finish();
                 break;
             case R.id.zhuche_bt:
+
                 break;
         }
     }
+
 }

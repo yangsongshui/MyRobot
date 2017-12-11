@@ -3,9 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
+    android:gravity="center"
+    android:saveEnabled="true"
     tools:context="com.myrobot.activity.LoadingActivity">
-<ImageView
-    android:layout_width="match_parent"
-    android:background="@drawable/loading"
-    android:layout_height="match_parent" />
+
+    <com.myrobot.widget.VideoView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:saveEnabled="true" />
 </LinearLayout>

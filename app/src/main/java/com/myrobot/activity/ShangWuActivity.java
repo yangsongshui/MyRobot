@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.azoft.carousellayoutmanager.CarouselLayoutManager;
@@ -20,20 +21,35 @@ import com.myrobot.bean.News;
 import java.util.Locale;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.myrobot.utils.Constant.NESW_URL;
 
-public class ShangWuActivity extends BaseActivity {
+public class ShangWuActivity extends BaseActivity implements Callback<News> {
     Retrofit retrofit;
     ProgressDialog progressDialog;
     NewsAdapter newsAdapter;
     @BindView(R.id.list_vertical)
     RecyclerView listVertical;
+    @BindView(R.id.msg_1)
+    TextView msg1;
+    @BindView(R.id.msg_2)
+    TextView msg2;
+    @BindView(R.id.msg_3)
+    TextView msg3;
+    @BindView(R.id.msg_4)
+    TextView msg4;
+    @BindView(R.id.msg_5)
+    TextView msg5;
+    @BindView(R.id.msg_6)
+    TextView msg6;
+    ServiceApi service;
 
     @Override
     protected int getContentView() {
@@ -50,8 +66,8 @@ public class ShangWuActivity extends BaseActivity {
                 .baseUrl(NESW_URL)
                 .build();
         progressDialog.show();
-        ServiceApi service = retrofit.create(ServiceApi.class);
-        Call<News> call = service.getNesw("机器人");
+        service = retrofit.create(ServiceApi.class);
+        Call<News> call = service.getNesw("人工智能", "1");
         call.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
@@ -77,6 +93,8 @@ public class ShangWuActivity extends BaseActivity {
                 showToastor("查询失败");
             }
         });
+        Call<News> call2 = service.getNesw("机器人", "1");
+        call2.enqueue(this);
     }
 
     private void initRecyclerView(final RecyclerView recyclerView, final CarouselLayoutManager layoutManager, final NewsAdapter adapter) {
@@ -114,6 +132,67 @@ public class ShangWuActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void initView(News.ShowapiResBodyBean.PagebeanBean pagebeanBean) {
+        msg1.setText(pagebeanBean.getContentlist().get(0).getTitle());
+        msg2.setText(pagebeanBean.getContentlist().get(1).getTitle());
+        msg3.setText(pagebeanBean.getContentlist().get(2).getTitle());
+        msg4.setText(pagebeanBean.getContentlist().get(3).getTitle());
+        msg5.setText(pagebeanBean.getContentlist().get(4).getTitle());
+        msg6.setText(pagebeanBean.getContentlist().get(5).getTitle());
+
+    }
+
+    @OnClick({R.id.shuaxin, R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.fanhui_bt, R.id.home_bt})
+    public void onViewClicked(View view) {
+        play();
+        switch (view.getId()) {
+            case R.id.shuaxin:
+
+                break;
+            case R.id.bt_1:
+                break;
+            case R.id.bt_2:
+                break;
+            case R.id.bt_3:
+                break;
+            case R.id.bt_4:
+                break;
+            case R.id.bt_5:
+                break;
+            case R.id.bt_6:
+                break;
+            case R.id.fanhui_bt:
+                finish();
+                break;
+            case R.id.home_bt:
+                finish();
+                break;
+        }
+    }
+
+
+    @Override
+    public void onResponse(Call<News> call, Response<News> response) {
+        //请求成功操作
+        News news = response.body();
+        if (news.getShowapi_res_code() == 0) {
+            showToastor("查询成功");
+            initView(news.getShowapi_res_body().getPagebean());
+
+        } else {
+            showToastor("查询失败");
+
+        }
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void onFailure(Call<News> call, Throwable t) {
+        //请求失败操作
+        progressDialog.dismiss();
+        showToastor("查询失败");
     }
 
 }

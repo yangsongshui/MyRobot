@@ -26,13 +26,16 @@ public class MainActivity extends BaseActivity {
     protected void init() {
 
     }
+
     @OnClick({R.id.login_bt, R.id.zhuche_bt, R.id.main_back})
     public void onViewClicked(View view) {
+        play();
         switch (view.getId()) {
             case R.id.login_bt:
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 break;
             case R.id.zhuche_bt:
+
                 startActivity(new Intent(MainActivity.this, ZhuCeActivity.class));
                 break;
             case R.id.main_back:
@@ -40,6 +43,7 @@ public class MainActivity extends BaseActivity {
                 break;
             default:
                 break;
+
         }
     }
 }

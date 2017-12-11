@@ -7,29 +7,84 @@
     android:background="@drawable/home_bg"
     tools:context="com.myrobot.activity.HomeActivity">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="300dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/tu1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/tu2" />
+
+        <ImageView
+            android:id="@+id/shun1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/shun1" />
+
+        <ImageView
+            android:id="@+id/ni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ni1" />
+
+        <ImageView
+            android:id="@+id/shun2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/shun2" />
+
+        <ImageView
+            android:id="@+id/ni2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ni2" />
+    </RelativeLayout>
+
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="85dp"
         android:background="@drawable/pic_bg"
         android:gravity="center_vertical">
+
         <ImageView
-            android:layout_width="40dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/pic"
-            android:layout_height="40dp" />
+            android:src="@drawable/pic" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="欢迎您:"
             android:textColor="@color/white"
-            android:textSize="25dp" />
+            android:textSize="55dp" />
 
         <TextView
             android:id="@+id/home_name"
@@ -38,17 +93,18 @@
             android:layout_marginTop="5dp"
             android:text="CNY.1"
             android:textColor="@color/faded_cyan"
-            android:textSize="25dp" />
+            android:textSize="55dp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/lianwang_bt"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="57dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/lianwang" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,64 +113,65 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="80dp"
-            android:layout_marginStart="80dp"
-
+            android:layout_marginEnd="200dp"
+            android:layout_marginStart="200dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/huyi_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="180dp"
-                android:layout_marginTop="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="150dp"
                 android:background="@drawable/huiyi_bt" />
 
             <Button
                 android:id="@+id/renji_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="180dp"
-                android:layout_marginBottom="80dp"
-                android:layout_marginTop="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="150dp"
                 android:background="@drawable/renji_bt" />
 
             <Button
                 android:id="@+id/jiqiren_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="180dp"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="150dp"
                 android:background="@drawable/jiqiren_bt" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="200dp"
+            android:layout_marginStart="200dp"
             android:layout_weight="1"
-            android:layout_marginEnd="80dp"
-            android:layout_marginStart="80dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/shangwu_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="180dp"
-                android:layout_marginTop="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+
+                android:layout_marginTop="150dp"
                 android:background="@drawable/shangwu_bt" />
 
             <Button
                 android:id="@+id/qiye_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="180dp"
-                android:layout_marginBottom="80dp"
-                android:layout_marginTop="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="150dp"
                 android:background="@drawable/qiye_bt" />
 
             <Button
                 android:id="@+id/yonghu_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="180dp"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="150dp"
                 android:background="@drawable/yonghu_bt" />
         </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

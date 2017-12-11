@@ -13,5 +13,5 @@ import retrofit2.http.Query;
 public interface ServiceApi {
     //新闻搜索
     @POST("109-35?showapi_appid=51436&showapi_sign=925d1f706dca48da876547c5fcf518cc")
-    Call<News> getNesw(@Query("title") String title);
+    Call<News> getNesw(@Query("title") String title,@Query("page") String page);
 }

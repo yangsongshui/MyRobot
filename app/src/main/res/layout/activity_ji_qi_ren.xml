@@ -6,31 +6,81 @@
     android:layout_height="match_parent"
     android:background="@drawable/home_bg"
     tools:context="com.myrobot.activity.JiQiRenActivity">
-
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/pic_bg"
-        android:gravity="center_vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/tu1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/tu2" />
+
+        <ImageView
+            android:id="@+id/shun1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/shun1" />
+
+        <ImageView
+            android:id="@+id/ni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ni1" />
+
+        <ImageView
+            android:id="@+id/shun2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/shun2" />
+
+        <ImageView
+            android:id="@+id/ni2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ni2" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/pic_bg"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/pic" />
+            android:src="@drawable/pic"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="欢迎您:"
             android:textColor="@color/white"
-            android:textSize="25dp" />
+            android:textSize="55dp" />
 
         <TextView
             android:id="@+id/home_name"
@@ -39,174 +89,126 @@
             android:layout_marginTop="5dp"
             android:text="CNY.1"
             android:textColor="@color/faded_cyan"
-            android:textSize="25dp" />
+            android:textSize="55dp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/lianwang_bt"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="57dp"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="120dp"
         android:background="@drawable/lianwang" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="50dp"
-            android:layout_weight="1.1"
+            android:layout_marginStart="200dp"
+            android:layout_marginEnd="200dp"
+
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/shexiang_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/shexiang_bt" />
 
             <Button
                 android:id="@+id/zhuping_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/zhuping_bt" />
 
             <Button
                 android:id="@+id/yinxiang_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/yinxiang_bt" />
 
             <Button
                 android:id="@+id/pingbi_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/pingbi_bt" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_weight="1.1"
+            android:layout_marginStart="200dp"
+            android:layout_marginEnd="200dp"
+
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/zhupin_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/zhupin_bt" />
 
             <Button
                 android:id="@+id/fenping_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/fenping_bt" />
 
             <Button
                 android:id="@+id/touying_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/touying_bt" />
 
             <Button
                 android:id="@+id/kongqi_bt"
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/kongqi_bt" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/zhongxin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/zhongxin" />
-
-                <Button
-                    android:id="@+id/shang_bt"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:layout_above="@+id/zhongxin"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/shang_bt" />
-
-                <Button
-                    android:id="@+id/zuo_bt"
-                    android:layout_width="300dp"
-                    android:layout_height="150dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@+id/zhongxin"
-                    android:background="@drawable/zuo_bt" />
-
-                <Button
-                    android:id="@+id/you_bt"
-                    android:layout_width="300dp"
-                    android:layout_height="150dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/zhongxin"
-                    android:background="@drawable/you_bt" />
-
-                <Button
-                    android:id="@+id/xia_bt"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:layout_below="@+id/zhongxin"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/xia_bt" />
-            </RelativeLayout>
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="180dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/fanhui_bg"
         android:gravity="center"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/fanhui_bt"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/fanhui_bt" />
 
         <Button
             android:id="@+id/home_bt"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/home_bt" />
     </LinearLayout>
 </RelativeLayout>

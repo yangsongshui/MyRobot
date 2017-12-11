@@ -26,7 +26,7 @@
         android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="机器人"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme,android:name,android:label">
@@ -42,13 +42,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.HuiYiActivity" />
-        <activity android:name=".activity.RenJiActivity" />
-        <activity android:name=".activity.JiQiRenActivity" />
-        <activity android:name=".activity.ZhuCeActivity" />
-        <activity android:name=".activity.GuanLiYuanActivity" />
-        <activity android:name=".activity.ShangWuActivity"></activity>
+        <activity android:name=".activity.HomeActivity"   android:screenOrientation="landscape"/>
+        <activity android:name=".activity.HuiYiActivity"   android:screenOrientation="landscape"/>
+        <activity android:name=".activity.RenJiActivity"   android:screenOrientation="landscape"/>
+        <activity android:name=".activity.JiQiRenActivity"   android:screenOrientation="landscape"/>
+        <activity android:name=".activity.ZhuCeActivity"   android:screenOrientation="landscape"/>
+        <activity android:name=".activity.GuanLiYuanActivity"   android:screenOrientation="landscape"/>
+        <activity android:name=".activity.ShangWuActivity"   android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

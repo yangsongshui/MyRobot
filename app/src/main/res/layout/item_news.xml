@@ -8,13 +8,13 @@
 
     <ImageView
         android:id="@+id/news_iv"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_width="900dp"
+        android:layout_height="530dp"
         android:src="@drawable/item" />
 
     <TextView
         android:id="@+id/news_tv"
-        android:layout_width="350dp"
+        android:layout_width="900dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/news_iv"
         android:layout_marginTop="10dp"

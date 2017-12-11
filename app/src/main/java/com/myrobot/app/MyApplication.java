@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.inpor.fastmeetingcloud.receiver.HstApplication;
 import com.myrobot.utils.AppContextUtil;
 import com.myrobot.utils.SpUtils;
 
@@ -46,6 +47,7 @@ public class MyApplication extends Application {
         instance = this;
         AppContextUtil.init(this);
         SpUtils.init(this);
+       HstApplication.initHstApplication(this);
 
     }
 
