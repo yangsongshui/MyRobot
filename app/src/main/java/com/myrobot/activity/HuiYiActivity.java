@@ -25,8 +25,8 @@ public class HuiYiActivity extends BaseActivity {
         mIntent.setAction(Constant.INTENT_APP_ACTION);
         mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_USERNAME, userName);  //必传
         mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_PASSWORD, password);//必传
-       // mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_ROOMID, et_roomid.getText().toString().trim());//选传
-       // mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_ROOMPASSWD, "f1234567890");//选传
+        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_ROOMID, "592879");//选传
+        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_ROOMPASSWD, "123456");//选传
         mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_SERVER_ADDRESS, serverAddress);//必传
         mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_SERVER_PORT, port);//必传
         mIntent.setComponent(apk2Component1);
