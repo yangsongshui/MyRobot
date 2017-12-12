@@ -27,6 +27,7 @@ public class GuanLiYuanActivity extends BaseActivity {
         play();
         switch (view.getId()) {
             case R.id.queren_beizhu:
+
                 break;
             case R.id.zizhanghao:
                 break;
