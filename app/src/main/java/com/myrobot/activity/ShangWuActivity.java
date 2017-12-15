@@ -169,6 +169,8 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
             case R.id.home_bt:
                 finish();
                 break;
+            default:
+                break;
         }
     }
 

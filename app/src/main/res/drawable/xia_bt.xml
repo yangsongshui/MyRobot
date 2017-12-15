@@ -3,8 +3,6 @@
 
 
     <item android:drawable="@drawable/xia_false" android:state_pressed="false" />
-
-
     <item android:drawable="@drawable/xia" android:state_pressed="true" />
 
 

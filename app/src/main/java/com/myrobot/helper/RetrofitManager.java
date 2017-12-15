@@ -51,7 +51,6 @@ public class RetrofitManager {
 
     private RetrofitManager() {
         initOkHttpClient();
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constant.BASE_URL)
                 .client(mOkHttpClient)
