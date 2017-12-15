@@ -7,8 +7,15 @@ import android.widget.EditText;
 import com.myrobot.R;
 import com.myrobot.base.BaseActivity;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,5 +52,27 @@ public class MainActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    OkHttpClient client = new OkHttpClient();
+
+    public String post(String url, String json) throws IOException {
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful()) {
+            try {
+                return response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new IOException("Unexpected code " + response);
+        }
+        return "";
     }
 }
