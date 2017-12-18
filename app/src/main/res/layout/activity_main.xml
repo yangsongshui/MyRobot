@@ -51,7 +51,7 @@
                     android:inputType="phone"
                     android:maxLength="11"
                     android:maxLines="1"
-                    android:textSize="65sp" />
+                    android:textSize="40dp" />
 
                 <TextView
                     android:id="@+id/phone"
@@ -87,7 +87,7 @@
                     android:inputType="textPassword"
                     android:maxLength="16"
                     android:maxLines="1"
-                    android:textSize="65sp" />
+                    android:textSize="40dp" />
 
                 <TextView
                     android:layout_width="wrap_content"

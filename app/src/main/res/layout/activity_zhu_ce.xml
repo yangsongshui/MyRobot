@@ -73,13 +73,13 @@
                 android:id="@+id/ed_ll3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="70dp"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:layout_marginEnd="70dp"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/coed_ed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/yanzhengma"
@@ -90,6 +90,7 @@
                     android:textSize="65sp" />
 
                 <TextView
+                    android:id="@+id/get_code"
                     android:layout_width="180dp"
                     android:layout_height="70dp"
                     android:layout_marginStart="15dp"
@@ -104,8 +105,8 @@
                 android:id="@+id/ed_ll2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -134,8 +135,8 @@
                 android:id="@+id/zhuche_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
                 android:layout_marginEnd="60dp"
+                android:layout_marginTop="80dp"
                 android:background="@drawable/zhuce_bt"
                 android:gravity="center"
                 android:text="注册"
@@ -155,4 +156,11 @@
         android:layout_marginEnd="100dp"
         android:src="@drawable/back" />
 
+    <ImageView
+        android:id="@+id/zhiwen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
 </RelativeLayout>

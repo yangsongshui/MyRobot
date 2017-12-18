@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.myrobot.R;
+import com.myrobot.app.MyApplication;
 import com.myrobot.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.OkHttpClient;
 
 public class HomeActivity extends BaseActivity {
 
@@ -30,7 +32,7 @@ public class HomeActivity extends BaseActivity {
     Animation operatingAnim2;
     Animation operatingAnim3;
     Animation operatingAnim4;
-
+    OkHttpClient client ;
     @Override
     protected int getContentView() {
         return R.layout.activity_home;
@@ -38,6 +40,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        client = MyApplication.newInstance().mOkHttpClient;
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         operatingAnim2 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim2);
         operatingAnim3 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
@@ -51,6 +54,8 @@ public class HomeActivity extends BaseActivity {
         shun2.startAnimation(operatingAnim3);
         ni1.startAnimation(operatingAnim2);
         ni2.startAnimation(operatingAnim4);
+
+
 
 
     }
@@ -75,6 +80,7 @@ public class HomeActivity extends BaseActivity {
                 startActivity(new Intent(this, ShangWuActivity.class));
                 break;
             case R.id.qiye_bt:
+                startActivity(new Intent(this, QiYeActivity.class));
                 break;
             case R.id.yonghu_bt:
                 startActivity(new Intent(this, GuanLiYuanActivity.class));
@@ -92,4 +98,7 @@ public class HomeActivity extends BaseActivity {
         ni1.clearAnimation();
         ni2.clearAnimation();
     }
+
+
+
 }

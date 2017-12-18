@@ -19,7 +19,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Retrofit管理类
@@ -55,7 +55,6 @@ public class RetrofitManager {
                 .baseUrl(Constant.BASE_URL)
                 .client(mOkHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         weatherServiceApi = retrofit.create(ServiceApi.class);
 

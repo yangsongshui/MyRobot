@@ -1,1 +1,1 @@
-include ':app', ':app-neutral-release'
+include ':app'

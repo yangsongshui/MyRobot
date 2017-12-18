@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.myrobot.R;
 import com.myrobot.base.BaseActivity;
 import com.myrobot.widget.CommomDialog;
+import com.myrobot.widget.OnOffDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,6 +34,7 @@ public class JiQiRenActivity extends BaseActivity {
     Animation operatingAnim3;
     Animation operatingAnim4;
     private CommomDialog dialog;
+    private OnOffDialog onOffDialog;
 
     @Override
     protected int getContentView() {
@@ -42,6 +44,7 @@ public class JiQiRenActivity extends BaseActivity {
     @Override
     protected void init() {
         dialog = new CommomDialog(this, R.style.dialog);
+        onOffDialog = new OnOffDialog(this, R.style.dialog);
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         operatingAnim2 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim2);
         operatingAnim3 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
@@ -67,28 +70,28 @@ public class JiQiRenActivity extends BaseActivity {
 
                 break;
             case R.id.shexiang_bt:
-                dialog.show();
+                onOffDialog.show();
                 break;
             case R.id.zhuping_bt:
                 dialog.show();
                 break;
             case R.id.yinxiang_bt:
-                dialog.show();
+                onOffDialog.show();
                 break;
             case R.id.pingbi_bt:
-                dialog.show();
+                onOffDialog.show();
                 break;
             case R.id.zhupin_bt:
                 dialog.show();
                 break;
             case R.id.fenping_bt:
-                dialog.show();
+                onOffDialog.show();
                 break;
             case R.id.touying_bt:
-                dialog.show();
+                onOffDialog.show();
                 break;
             case R.id.kongqi_bt:
-                dialog.show();
+                onOffDialog.show();
                 break;
             case R.id.fanhui_bt:
                 finish();

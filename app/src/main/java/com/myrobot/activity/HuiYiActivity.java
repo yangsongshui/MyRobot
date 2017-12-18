@@ -1,10 +1,5 @@
 package com.myrobot.activity;
 
-import android.content.ComponentName;
-import android.content.Intent;
-
-import com.inpor.fastmeetingcloud.ui.StartTheMiddleTierActivity;
-import com.inpor.fastmeetingcloud.util.Constant;
 import com.myrobot.R;
 import com.myrobot.base.BaseActivity;
 
@@ -16,21 +11,16 @@ public class HuiYiActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        String userName = "wel00";
+       /* String userName = "wel03";
         String password = "123456";
-        String port = "1089";
         String serverAddress = "a.fsmeeting.com";
-        ComponentName apk2Component1 = new ComponentName("com.myrobot", "com.inpor.fastmeetingcloud.ui.StartTheMiddleTierActivity");
-        Intent mIntent = new Intent();
-        mIntent.setAction(Constant.INTENT_APP_ACTION);
-        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_USERNAME, userName);  //必传
-        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_PASSWORD, password);//必传
-        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_ROOMID, "592879");//选传
-        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_ROOMPASSWD, "123456");//选传
-        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_SERVER_ADDRESS, serverAddress);//必传
-        mIntent.putExtra(StartTheMiddleTierActivity.ThirdLoginConstant.BUNDLE_SERVER_PORT, port);//必传
-        mIntent.setComponent(apk2Component1);
-        startActivity(mIntent);
-        finish();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setAction(StaticString.ACTION_PRIVACY_ACCOUNT);
+        intent.putExtra(StaticString.INTENT_LINK_USERNAME, userName); //必传
+        intent.putExtra(StaticString.INTENT_LINK_USERPWD, password);//必传 
+
+        intent.putExtra(StaticString.INTENT_LINK_SERVER, new String[]{serverAddress + ":1089"}); //必传
+        startActivity(intent);
+        finish();*/
     }
 }

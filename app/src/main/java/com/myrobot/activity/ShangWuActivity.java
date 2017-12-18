@@ -1,10 +1,12 @@
 package com.myrobot.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,8 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
     TextView msg5;
     @BindView(R.id.msg_6)
     TextView msg6;
+    @BindView(R.id.msg_et)
+    EditText msg_et;
     ServiceApi service;
 
     @Override
@@ -67,7 +71,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
                 .build();
         progressDialog.show();
         service = retrofit.create(ServiceApi.class);
-        Call<News> call = service.getNesw("人工智能", "1");
+        Call<News> call = service.getNesw("机器人", "1");
         call.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
@@ -93,7 +97,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
                 showToastor("查询失败");
             }
         });
-        Call<News> call2 = service.getNesw("机器人", "1");
+        Call<News> call2 = service.getNesw("人工智能", "1");
         call2.enqueue(this);
     }
 
@@ -135,33 +139,62 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
     }
 
     private void initView(News.ShowapiResBodyBean.PagebeanBean pagebeanBean) {
-        msg1.setText(pagebeanBean.getContentlist().get(0).getTitle());
-        msg2.setText(pagebeanBean.getContentlist().get(1).getTitle());
-        msg3.setText(pagebeanBean.getContentlist().get(2).getTitle());
-        msg4.setText(pagebeanBean.getContentlist().get(3).getTitle());
-        msg5.setText(pagebeanBean.getContentlist().get(4).getTitle());
-        msg6.setText(pagebeanBean.getContentlist().get(5).getTitle());
+        this.pagebeanBean = pagebeanBean;
+        if (pagebeanBean.getContentlist().size() > 0)
+            msg1.setText(pagebeanBean.getContentlist().get(0).getTitle());
+
+        if (pagebeanBean.getContentlist().size() > 1)
+            msg2.setText(pagebeanBean.getContentlist().get(1).getTitle());
+
+        if (pagebeanBean.getContentlist().size() > 2)
+            msg3.setText(pagebeanBean.getContentlist().get(2).getTitle());
+
+        if (pagebeanBean.getContentlist().size() > 3)
+            msg4.setText(pagebeanBean.getContentlist().get(3).getTitle());
+
+        if (pagebeanBean.getContentlist().size() > 4)
+            msg5.setText(pagebeanBean.getContentlist().get(4).getTitle());
+
+        if (pagebeanBean.getContentlist().size() > 5)
+            msg6.setText(pagebeanBean.getContentlist().get(5).getTitle());
+
 
     }
 
-    @OnClick({R.id.shuaxin, R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.fanhui_bt, R.id.home_bt})
+    @OnClick({R.id.shuaxin, R.id.shousuo_bt, R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.fanhui_bt, R.id.home_bt})
     public void onViewClicked(View view) {
         play();
         switch (view.getId()) {
             case R.id.shuaxin:
-
+                break;
+            case R.id.shousuo_bt:
+                if (!msg_et.getText().toString().equals("")) {
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://news.baidu.com/ns?word=" + msg_et.getText().toString()));
+                }
                 break;
             case R.id.bt_1:
+                if (pagebeanBean != null)
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(0).getLink()));
                 break;
             case R.id.bt_2:
+                if (pagebeanBean != null)
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(1).getLink()));
                 break;
             case R.id.bt_3:
+                if (pagebeanBean != null)
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(2).getLink()));
                 break;
             case R.id.bt_4:
+                if (pagebeanBean != null)
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(3).getLink()));
                 break;
             case R.id.bt_5:
+                if (pagebeanBean != null)
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(4).getLink()));
                 break;
             case R.id.bt_6:
+                if (pagebeanBean != null)
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(5).getLink()));
                 break;
             case R.id.fanhui_bt:
                 finish();
@@ -174,6 +207,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
         }
     }
 
+    News.ShowapiResBodyBean.PagebeanBean pagebeanBean;
 
     @Override
     public void onResponse(Call<News> call, Response<News> response) {

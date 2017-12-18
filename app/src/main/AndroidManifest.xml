@@ -21,6 +21,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".app.MyApplication"
@@ -42,13 +44,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeActivity"   android:screenOrientation="landscape"/>
-        <activity android:name=".activity.HuiYiActivity"   android:screenOrientation="landscape"/>
-        <activity android:name=".activity.RenJiActivity"   android:screenOrientation="landscape"/>
-        <activity android:name=".activity.JiQiRenActivity"   android:screenOrientation="landscape"/>
-        <activity android:name=".activity.ZhuCeActivity"   android:screenOrientation="landscape"/>
-        <activity android:name=".activity.GuanLiYuanActivity"   android:screenOrientation="landscape"/>
-        <activity android:name=".activity.ShangWuActivity"   android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.HomeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.HuiYiActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.RenJiActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.JiQiRenActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.ZhuCeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.GuanLiYuanActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.ShangWuActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".activity.QiYeActivity" />
+        <activity android:name=".activity.WebActivity"/>
+        <meta-data android:name="com.baidu.speech.APP_ID"
+            android:value="10543972" />
+        <meta-data
+            android:name="com.baidu.speech.API_KEY"
+            android:value="Ij8iZTyjdWn2WceqP0x5Egjn" />
+        <meta-data
+            android:name="com.baidu.speech.SECRET_KEY"
+            android:value="R914etRqV7vXipuu8G6hr1smPCKC212F" />
+        <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false" />
     </application>
 
 </manifest>
