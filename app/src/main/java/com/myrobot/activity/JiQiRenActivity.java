@@ -11,6 +11,7 @@ import com.myrobot.R;
 import com.myrobot.base.BaseActivity;
 import com.myrobot.widget.CommomDialog;
 import com.myrobot.widget.OnOffDialog;
+import com.myrobot.widget.VolumeDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,6 +36,7 @@ public class JiQiRenActivity extends BaseActivity {
     Animation operatingAnim4;
     private CommomDialog dialog;
     private OnOffDialog onOffDialog;
+    private VolumeDialog volumeDialog;
 
     @Override
     protected int getContentView() {
@@ -45,6 +47,7 @@ public class JiQiRenActivity extends BaseActivity {
     protected void init() {
         dialog = new CommomDialog(this, R.style.dialog);
         onOffDialog = new OnOffDialog(this, R.style.dialog);
+        volumeDialog = new VolumeDialog(this, R.style.dialog);
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         operatingAnim2 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim2);
         operatingAnim3 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
@@ -67,16 +70,15 @@ public class JiQiRenActivity extends BaseActivity {
         play();
         switch (view.getId()) {
             case R.id.lianwang_bt:
-
                 break;
             case R.id.shexiang_bt:
                 onOffDialog.show();
                 break;
             case R.id.zhuping_bt:
-                dialog.show();
+                onOffDialog.show();
                 break;
             case R.id.yinxiang_bt:
-                onOffDialog.show();
+                volumeDialog.show();
                 break;
             case R.id.pingbi_bt:
                 onOffDialog.show();
@@ -103,6 +105,7 @@ public class JiQiRenActivity extends BaseActivity {
                 break;
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

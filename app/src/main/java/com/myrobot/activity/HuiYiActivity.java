@@ -1,5 +1,9 @@
 package com.myrobot.activity;
 
+import android.content.Intent;
+
+import com.inpor.fmctv.fsutils.StaticString;
+import com.inpor.fmctv.pteActivity.LoginActivity;
 import com.myrobot.R;
 import com.myrobot.base.BaseActivity;
 
@@ -11,7 +15,7 @@ public class HuiYiActivity extends BaseActivity {
 
     @Override
     protected void init() {
-       /* String userName = "wel03";
+        String userName = "wel03";
         String password = "123456";
         String serverAddress = "a.fsmeeting.com";
         Intent intent = new Intent(this, LoginActivity.class);
@@ -21,6 +25,6 @@ public class HuiYiActivity extends BaseActivity {
 
         intent.putExtra(StaticString.INTENT_LINK_SERVER, new String[]{serverAddress + ":1089"}); //必传
         startActivity(intent);
-        finish();*/
+        finish();
     }
 }

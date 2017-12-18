@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,10 +12,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.myrobot.R;
 import com.myrobot.api.Page;
-import com.myrobot.api.ServiceApi;
 import com.myrobot.app.MyApplication;
 import com.myrobot.base.BaseActivity;
-import com.myrobot.bean.News;
 
 import java.io.IOException;
 
@@ -27,12 +24,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.myrobot.utils.Constant.NESW_URL;
-
-public class QiYeActivity extends BaseActivity implements retrofit2.Callback<News> {
+public class QiYeActivity extends BaseActivity {
 
     @BindView(R.id.msg_1)
     TextView msg1;
@@ -46,13 +39,24 @@ public class QiYeActivity extends BaseActivity implements retrofit2.Callback<New
     TextView msg5;
     @BindView(R.id.msg_6)
     TextView msg6;
+
+    @BindView(R.id.bt_1)
+    TextView bt_1;
+    @BindView(R.id.bt_2)
+    TextView bt_2;
+    @BindView(R.id.bt_3)
+    TextView bt_3;
+    @BindView(R.id.bt_4)
+    TextView bt_4;
+    @BindView(R.id.bt_5)
+    TextView bt_5;
+    @BindView(R.id.bt_6)
+    TextView bt_6;
     @BindView(R.id.msg_et)
     EditText msg_et;
     OkHttpClient client;
     Gson gs;
     Handler handler;
-    ServiceApi service;
-    Retrofit retrofit;
     ProgressDialog progressDialog;
 
     @Override
@@ -64,17 +68,8 @@ public class QiYeActivity extends BaseActivity implements retrofit2.Callback<New
     protected void init() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("数据查询中...");
-        retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(NESW_URL)
-                .build();
-        progressDialog.show();
-        service = retrofit.create(ServiceApi.class);
-        retrofit2.Call<News> call = service.getNesw("企业", "1");
-        call.enqueue(this);
-
         gs = new Gson();
-        client = MyApplication.newInstance().mOkHttpClient;
+        client = MyApplication.newInstance().getmOkHttpClient();
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -90,38 +85,39 @@ public class QiYeActivity extends BaseActivity implements retrofit2.Callback<New
         postPage("http://112.74.196.237:81/robot_api/public/index.php/api/3/files?key=");
     }
 
-    @OnClick({R.id.bt_1, R.id.shousuo_bt,R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.fanhui_bt, R.id.home_bt})
+    @OnClick({R.id.bt_1, R.id.shousuo_bt, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.fanhui_bt, R.id.home_bt})
     public void onViewClicked(View view) {
         play();
         switch (view.getId()) {
             case R.id.shousuo_bt:
-               if (!msg_et.getText().toString().equals("")) {
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://news.baidu.com/ns?word="+msg_et.getText().toString()));
+                if (!msg_et.getText().toString().equals("")) {
+                    postPage("http://112.74.196.237:81/robot_api/public/index.php/api/3/files?key=" + msg_et.getText().toString());
+                    // startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://news.baidu.com/ns?word=" + msg_et.getText().toString()));
                 }
                 break;
             case R.id.bt_1:
-                if (pagebeanBean != null)
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(0).getLink()));
+
+                startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(0).getPath()));
                 break;
             case R.id.bt_2:
-                if (pagebeanBean != null)
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(1).getLink()));
+                //if (pagebeanBean != null)
+                startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(1).getPath()));
                 break;
             case R.id.bt_3:
-                if (pagebeanBean != null)
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(2).getLink()));
+                // if (pagebeanBean != null)
+                startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(2).getPath()));
                 break;
             case R.id.bt_4:
-                if (pagebeanBean != null)
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(3).getLink()));
+                // if (pagebeanBean != null)
+                startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(3).getPath()));
                 break;
             case R.id.bt_5:
-                if (pagebeanBean != null)
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(4).getLink()));
+                //  if (pagebeanBean != null)
+                startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(4).getPath()));
                 break;
             case R.id.bt_6:
-                if (pagebeanBean != null)
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", pagebeanBean.getContentlist().get(5).getLink()));
+                // if (pagebeanBean != null)
+                startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(5).getPath()));
                 break;
             case R.id.fanhui_bt:
                 finish();
@@ -153,51 +149,70 @@ public class QiYeActivity extends BaseActivity implements retrofit2.Callback<New
             public void onResponse(Call call, Response response) throws IOException {
                 String js = response.body().string();
                 Page page = gs.fromJson(js, Page.class);//把JSON字符串转为对象
-                Message msg = new Message();
-                Bundle b = new Bundle();// 存放数据
-                b.putString("msg", page.getMsg());
-                msg.setData(b);
-                handler.sendMessage(msg);
+                if (page != null){
+                    Message msg = new Message();
+                    Bundle b = new Bundle();// 存放数据
+                    b.putString("msg", page.getMsg());
+                    msg.setData(b);
+                    handler.sendMessage(msg);
+                    if (page.getCode() == 1) {
+
+                        initView();
+                    }
+                }else {
+                    Message msg = new Message();
+                    Bundle b = new Bundle();// 存放数据
+                    b.putString("msg", "查询失败");
+                    msg.setData(b);
+                    handler.sendMessage(msg);
+
+                }
 
 
             }
         });
     }
 
-    @Override
-    public void onResponse(retrofit2.Call<News> call, retrofit2.Response<News> response) {
-        News news = response.body();
 
-        if (news.getShowapi_res_code() == 0) {
-            showToastor("查询成功");
-            initView(news.getShowapi_res_body().getPagebean());
-
+    private void initView() {
+        if (page.getData().size() > 0) {
+            msg1.setText(page.getData().get(0).getName());
+            bt_1.setVisibility(View.VISIBLE);
         } else {
-            showToastor("查询失败");
-
+            bt_1.setVisibility(View.GONE);
         }
-        progressDialog.dismiss();
-    }
+        if (page.getData().size() > 1) {
+            msg2.setText(page.getData().get(1).getName());
+            bt_2.setVisibility(View.VISIBLE);
+        } else {
+            bt_2.setVisibility(View.GONE);
+        }
+        if (page.getData().size() > 2) {
+            msg3.setText(page.getData().get(2).getName());
+            bt_3.setVisibility(View.VISIBLE);
+        } else {
+            bt_3.setVisibility(View.GONE);
+        }
+        if (page.getData().size() > 3) {
+            msg4.setText(page.getData().get(3).getName());
+            bt_4.setVisibility(View.VISIBLE);
+        } else {
+            bt_4.setVisibility(View.GONE);
+        }
 
-    @Override
-    public void onFailure(retrofit2.Call<News> call, Throwable t) {
-        //请求失败操作
-        progressDialog.dismiss();
-        showToastor("网络异常");
-        Log.e("错误", t.getMessage().toString());
-    }
+        if (page.getData().size() > 4) {
+            msg5.setText(page.getData().get(4).getName());
+            bt_5.setVisibility(View.VISIBLE);
+        } else {
+            bt_5.setVisibility(View.GONE);
+        }
+        if (page.getData().size() > 5) {
+            msg6.setText(page.getData().get(5).getName());
+            bt_6.setVisibility(View.VISIBLE);
+        } else {
+            bt_6.setVisibility(View.GONE);
+        }
 
-    News.ShowapiResBodyBean.PagebeanBean pagebeanBean;
-
-    private void initView(News.ShowapiResBodyBean.PagebeanBean pagebeanBean) {
-        Log.e("JSON", pagebeanBean.toString());
-        this.pagebeanBean = pagebeanBean;
-        msg1.setText(pagebeanBean.getContentlist().get(0).getTitle());
-        msg2.setText(pagebeanBean.getContentlist().get(1).getTitle());
-        msg3.setText(pagebeanBean.getContentlist().get(2).getTitle());
-        msg4.setText(pagebeanBean.getContentlist().get(3).getTitle());
-        msg5.setText(pagebeanBean.getContentlist().get(4).getTitle());
-        msg6.setText(pagebeanBean.getContentlist().get(5).getTitle());
 
     }
 }

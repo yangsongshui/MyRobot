@@ -57,7 +57,7 @@ public class ZhuCeActivity extends BaseActivity {
     @Override
     protected void init() {
         gs = new Gson();
-        client = MyApplication.newInstance().mOkHttpClient;
+        client = MyApplication.newInstance().getmOkHttpClient();
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {

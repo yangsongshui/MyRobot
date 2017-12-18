@@ -68,7 +68,7 @@
         <activity android:name=".activity.QiYeActivity" />
         <activity android:name=".activity.WebActivity"/>
         <meta-data android:name="com.baidu.speech.APP_ID"
-            android:value="10543972" />
+            android:value="10543841" />
         <meta-data
             android:name="com.baidu.speech.API_KEY"
             android:value="Ij8iZTyjdWn2WceqP0x5Egjn" />

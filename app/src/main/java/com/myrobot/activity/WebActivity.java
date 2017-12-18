@@ -1,7 +1,6 @@
 package com.myrobot.activity;
 
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.myrobot.R;
@@ -24,10 +23,7 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void init() {
         String url = getIntent().getStringExtra("url");
-        WebSettings webSettings = webView.getSettings();
         //设置自适应屏幕，两者合用
-        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
-        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
         webView.loadUrl(url);
     }
 

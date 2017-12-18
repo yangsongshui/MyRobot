@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.inpor.fmctv.application.HstApplication;
 import com.myrobot.utils.AppContextUtil;
 import com.myrobot.utils.NetUtil;
 import com.myrobot.utils.SpUtils;
@@ -34,7 +35,7 @@ public class MyApplication extends Application {
 
     private static MyApplication instance;
     public static List<Activity> activitiesList = new ArrayList<Activity>(); // 活动管理集合
-    public static OkHttpClient mOkHttpClient;
+    private static OkHttpClient mOkHttpClient;
 
 
     /**
@@ -52,7 +53,7 @@ public class MyApplication extends Application {
         instance = this;
         AppContextUtil.init(this);
         SpUtils.init(this);
-        //HstApplication.initHstApplication(getApplicationContext());
+        HstApplication.initHstApplication(getApplicationContext());
         initOkHttpClient();
 
     }
@@ -102,21 +103,19 @@ public class MyApplication extends Application {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         if (mOkHttpClient == null) {
-            if (mOkHttpClient == null) {
-                // 指定缓存路径,缓存大小100Mb
-                Cache cache = new Cache(new File(MyApplication.newInstance().getCacheDir(), "HttpCache"),
-                        1024 * 1024 * 100);
-
-                mOkHttpClient = new OkHttpClient.Builder()
-                        .cache(cache)
-                        .addInterceptor(mRewriteCacheControlInterceptor)
-                        .addNetworkInterceptor(mRewriteCacheControlInterceptor)
-                        .addInterceptor(interceptor)
+            // 指定缓存路径,缓存大小100Mb
+            Cache cache = new Cache(new File(MyApplication.newInstance().getCacheDir(), "HttpCache"),
+                    1024 * 1024 * 100);
+            mOkHttpClient = new OkHttpClient.Builder()
+                    .cache(cache)
+                    .addInterceptor(mRewriteCacheControlInterceptor)
+                    .addNetworkInterceptor(mRewriteCacheControlInterceptor)
+                    .addInterceptor(interceptor)
 //                            .addNetworkInterceptor(new StethoInterceptor())
-                        .retryOnConnectionFailure(true)
-                        .connectTimeout(15, TimeUnit.SECONDS)
-                        .build();
-            }
+                    .retryOnConnectionFailure(true)
+                    .connectTimeout(15, TimeUnit.SECONDS)
+                    .build();
+
 
         }
     }
@@ -145,4 +144,7 @@ public class MyApplication extends Application {
         }
     };
 
+    public OkHttpClient getmOkHttpClient() {
+        return mOkHttpClient;
+    }
 }

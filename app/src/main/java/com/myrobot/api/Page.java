@@ -8,10 +8,11 @@ import java.util.List;
 
 public class Page {
 
+
     /**
      * code : 1
      * msg :
-     * data : [{"id":1,"name":"企业如何实现自己的价值","path":"http://api.jian-tec.com/uploads/users/uploads/企业如何实现自己的价值.doc"},{"id":2,"name":"企业管理","path":"http://api.jian-tec.com/uploads/users/uploads/企业管理.doc"},{"id":4,"name":"恶臭擦擦","path":null}]
+     * data : [{"id":4,"name":"公司规章制度","path":"http://112.74.196.237:81/robot_admin/public/uploads/20171218/0378d5432473fba9aa1f151f34897cf9.docx"},{"id":5,"name":"公司发展规划","path":"http://112.74.196.237:81/robot_admin/public/uploads/20171218/41de9048b72e729844b342719d112ec1.docx"},{"id":6,"name":"企业激励制度","path":"http://112.74.196.237:81/robot_admin/public/uploads/20171218/77a24bb5e2185df4a539bf5d80c03df2.docx"},{"id":7,"name":"泡妞","path":"http://112.74.196.237:81/robot_admin/public/uploads/20171218/80ac17dd3b4d5bbf21c1f4adfb0f159b.mp4"}]
      */
 
     private int code;
@@ -44,9 +45,9 @@ public class Page {
 
     public static class DataBean {
         /**
-         * id : 1
-         * name : 企业如何实现自己的价值
-         * path : http://api.jian-tec.com/uploads/users/uploads/企业如何实现自己的价值.doc
+         * id : 4
+         * name : 公司规章制度
+         * path : http://112.74.196.237:81/robot_admin/public/uploads/20171218/0378d5432473fba9aa1f151f34897cf9.docx
          */
 
         private int id;

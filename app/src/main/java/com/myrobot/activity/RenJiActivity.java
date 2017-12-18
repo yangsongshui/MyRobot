@@ -216,7 +216,7 @@ public class RenJiActivity extends BaseActivity {
             super.onAsrFinalResult(results, recogResult);
             String msg = results[0];
             if (!msg.equals("")) {
-                startActivity(new Intent(RenJiActivity.this, WebActivity.class).putExtra("url", "http://www.baidu.com/s?word=" + msg));
+                startActivity(new Intent(RenJiActivity.this, WebActivity.class).putExtra("url", "http://www.baidu.com/s?wd=" + msg));
                 speak(msg);
             }
 
