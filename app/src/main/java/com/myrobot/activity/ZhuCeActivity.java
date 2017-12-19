@@ -15,7 +15,6 @@ import com.google.gson.JsonObject;
 import com.myrobot.R;
 import com.myrobot.api.Code;
 import com.myrobot.api.User;
-import com.myrobot.app.MyApplication;
 import com.myrobot.base.BaseActivity;
 import com.myrobot.utils.MD5;
 
@@ -57,7 +56,7 @@ public class ZhuCeActivity extends BaseActivity {
     @Override
     protected void init() {
         gs = new Gson();
-        client = MyApplication.newInstance().getmOkHttpClient();
+        client = new OkHttpClient();
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {

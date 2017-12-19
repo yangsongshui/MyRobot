@@ -9,10 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.myrobot.R;
 import com.myrobot.api.User;
-import com.myrobot.app.MyApplication;
 import com.myrobot.base.BaseActivity;
+import com.myrobot.utils.MD5;
 
 import java.io.IOException;
 
@@ -47,7 +48,7 @@ public class MainActivity extends BaseActivity {
     protected void init() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("加载中...");
-        client = MyApplication.newInstance().getmOkHttpClient();
+        client = new OkHttpClient();
         gs = new Gson();
         handler = new Handler(new Handler.Callback() {
             @Override
@@ -68,7 +69,7 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.login_bt:
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
-               /* if (!progressDialog.isShowing()) {
+                if (!progressDialog.isShowing()) {
                     progressDialog.show();
                 }
                 String phone = phoneEt.getText().toString();
@@ -76,7 +77,7 @@ public class MainActivity extends BaseActivity {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("phone", phone);
                 jsonObject.addProperty("password", MD5.getMD5(psw));
-                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());*/
+                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
 
                 break;
             case R.id.zhuche_bt:

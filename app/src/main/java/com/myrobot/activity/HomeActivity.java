@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.myrobot.R;
-import com.myrobot.app.MyApplication;
 import com.myrobot.base.BaseActivity;
 
 import butterknife.BindView;
@@ -40,7 +39,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        client = MyApplication.newInstance().getmOkHttpClient();
+        client = new OkHttpClient();
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         operatingAnim2 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim2);
         operatingAnim3 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
