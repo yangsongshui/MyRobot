@@ -61,7 +61,7 @@ public class QiYeActivity extends BaseActivity {
             }
         });
 
-        postPage("http://112.74.196.237:81/robot_api/public/index.php/api/3/files?key=");
+        postPage("http://112.74.196.237:81/robot_api/public/index.php/api/30/files?key=");
     }
 
     @OnClick({R.id.shousuo_bt, R.id.fanhui_bt, R.id.home_bt})
@@ -71,7 +71,7 @@ public class QiYeActivity extends BaseActivity {
             case R.id.shousuo_bt:
                 if (!msg_et.getText().toString().equals("")) {
                     progressDialog.show();
-                    postPage("http://112.74.196.237:81/robot_api/public/index.php/api/3/files?key=" + msg_et.getText().toString());
+                    postPage("http://112.74.196.237:81/robot_api/public/index.php/api/30/files?key=" + msg_et.getText().toString());
 
                 }
                 break;

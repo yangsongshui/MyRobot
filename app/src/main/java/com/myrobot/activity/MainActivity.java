@@ -108,7 +108,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-
                 String js = response.body().string();
                 User user = gs.fromJson(js, User.class);//把JSON字符串转为对象
                 Message msg = new Message();
@@ -117,8 +116,9 @@ public class MainActivity extends BaseActivity {
                     b.putString("msg", user.getMsg());
                     msg.setData(b);
                     handler.sendMessage(msg);
-                    if (user.getCode() == 1)
+                    if (user.getCode() == 1) {
                         startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                    }
                 } else {
                     b.putString("msg", "数据获取失败");
                     msg.setData(b);
