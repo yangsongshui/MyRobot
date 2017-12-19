@@ -30,13 +30,14 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(getContentView());
+        toastor = new Toastor(this);
         ButterKnife.bind(this);
         //用于显示当前位于哪个活动
         Log.d("BaseActivity", getClass().getSimpleName());
         sp = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
         music = sp.load(this, R.raw.start, 1); //把你的声音素材放到res/raw里，第2个参数即为资源文件，第3个为音乐的优先级
         init();
-        toastor = new Toastor(this);
+
         initPermission();
     }
 

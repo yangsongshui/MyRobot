@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
             public boolean handleMessage(Message msg) {
 
 
-                showToastor(msg.getData().getString("msg"));
+               // showToastor(msg.getData().getString("msg"));
 
 
                 return false;
@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity {
         play();
         switch (view.getId()) {
             case R.id.login_bt:
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                //startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 if (!progressDialog.isShowing()) {
                     progressDialog.show();
                 }
@@ -110,18 +110,18 @@ public class MainActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String js = response.body().string();
                 User user = gs.fromJson(js, User.class);//把JSON字符串转为对象
-                Message msg = new Message();
-                Bundle b = new Bundle();// 存放数据
+          /*      Message msg = new Message();
+                Bundle b = new Bundle();// 存放数据*/
                 if (user != null) {
-                    b.putString("msg", user.getMsg());
+                 /*   b.putString("msg", user.getMsg());
                     msg.setData(b);
-                    handler.sendMessage(msg);
+                    handler.sendMessage(msg);*/
                     if (user.getCode() == 1) {
                         startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     }
                 } else {
-                    b.putString("msg", "数据获取失败");
-                    msg.setData(b);
+                  /*  b.putString("msg", "数据获取失败");
+                    msg.setData(b);*/
                 }
                 if (progressDialog.isShowing()) {
                     progressDialog.dismiss();

@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -36,6 +38,7 @@ public class QiYeActivity extends BaseActivity {
     Handler handler;
     ProgressDialog progressDialog;
     PageAdapter pageAdapter;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_qi_ye;
@@ -46,14 +49,16 @@ public class QiYeActivity extends BaseActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("数据查询中...");
         gs = new Gson();
-        client =  new OkHttpClient();
-        progressDialog.show();
+        client = new OkHttpClient();
+        pageAdapter = new PageAdapter(this);
         initView();
+        progressDialog.show();
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                pageAdapter.setItems(page.getData());
                 showToastor(msg.getData().getString("msg"));
+                if (msg.arg1==1)
+                    pageAdapter.setItems(page.getData());
                 if (progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
@@ -98,23 +103,26 @@ public class QiYeActivity extends BaseActivity {
                 Bundle b = new Bundle();// 存放数据
                 b.putString("msg", "网络异常");
                 msg.setData(b);
+                msg.arg1 = 0;
                 handler.sendMessage(msg);
-
+                Log.e("js", e.getMessage().toString());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String js = response.body().string();
-                Page page = gs.fromJson(js, Page.class);//把JSON字符串转为对象
+                Log.e("js", js);
+                page = gs.fromJson(js, Page.class);//把JSON字符串转为对象
                 if (page != null) {
                     Message msg = new Message();
                     Bundle b = new Bundle();// 存放数据
-                    if (page.getCode()==1){
+                    if (page.getCode() == 1) {
+                        msg.arg1 = 1;
                         b.putString("msg", "查询成功");
-                    }else {
+                    } else {
+                        msg.arg1 = 0;
                         b.putString("msg", "查询失败");
                     }
-                    b.putString("msg", page.getMsg());
                     msg.setData(b);
                     handler.sendMessage(msg);
                 } else {
@@ -132,7 +140,7 @@ public class QiYeActivity extends BaseActivity {
 
 
     private void initView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(layoutManager);
         pageAdapter = new PageAdapter(this);

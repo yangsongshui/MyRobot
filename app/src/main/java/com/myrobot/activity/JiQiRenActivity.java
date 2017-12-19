@@ -75,7 +75,7 @@ public class JiQiRenActivity extends BaseActivity {
                 onOffDialog.show();
                 break;
             case R.id.zhuping_bt:
-                onOffDialog.show();
+                dialog.show();
                 break;
             case R.id.yinxiang_bt:
                 volumeDialog.show();
@@ -84,7 +84,8 @@ public class JiQiRenActivity extends BaseActivity {
                 onOffDialog.show();
                 break;
             case R.id.zhupin_bt:
-                dialog.show();
+                onOffDialog.show();
+
                 break;
             case R.id.fenping_bt:
                 onOffDialog.show();
