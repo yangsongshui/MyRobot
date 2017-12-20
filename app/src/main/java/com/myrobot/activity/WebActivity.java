@@ -1,7 +1,9 @@
 package com.myrobot.activity;
 
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.myrobot.R;
 import com.myrobot.base.BaseActivity;
@@ -23,7 +25,19 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void init() {
         String url = getIntent().getStringExtra("url");
-        //设置自适应屏幕，两者合用
+
+
+        WebSettings wSet = webView.getSettings();
+        wSet.setJavaScriptEnabled(true);
+        wSet.setUseWideViewPort(true);
+        wSet.setLoadWithOverviewMode(true);
+        webView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            { //  重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
+                view.loadUrl(url);
+                return true;
+            }
+        });
         webView.loadUrl(url);
     }
 

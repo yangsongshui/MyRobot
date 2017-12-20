@@ -1,6 +1,7 @@
 package com.myrobot.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.myrobot.OnItemCheckListener;
 import com.myrobot.R;
 import com.myrobot.adapter.PageAdapter;
 import com.myrobot.api.Page;
@@ -27,7 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class QiYeActivity extends BaseActivity {
+public class QiYeActivity extends BaseActivity implements OnItemCheckListener {
 
     @BindView(R.id.msg_et)
     EditText msg_et;
@@ -67,6 +69,7 @@ public class QiYeActivity extends BaseActivity {
         });
 
         postPage("http://112.74.196.237:81/robot_api/public/index.php/api/30/files?key=");
+        pageAdapter.setOnItemCheckListener(this);
     }
 
     @OnClick({R.id.shousuo_bt, R.id.fanhui_bt, R.id.home_bt})
@@ -145,5 +148,10 @@ public class QiYeActivity extends BaseActivity {
         listView.setLayoutManager(layoutManager);
         pageAdapter = new PageAdapter(this);
         listView.setAdapter(pageAdapter);
+    }
+
+    @Override
+    public void OnItemCheck(RecyclerView.ViewHolder viewHolder, int position) {
+        startActivity(new Intent(this,WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(position).getPath()));
     }
 }

@@ -169,7 +169,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
                 break;
             case R.id.shousuo_bt:
                 if (!msg_et.getText().toString().equals("")) {
-                    startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://news.baidu.com/ns?wd=" + msg_et.getText().toString()));
+                    startActivity(new Intent(this, WebActivity.class).putExtra("url", "http://www.baidu.com/s?wd=" + msg_et.getText().toString()));
                 }
                 break;
             case R.id.bt_1:
