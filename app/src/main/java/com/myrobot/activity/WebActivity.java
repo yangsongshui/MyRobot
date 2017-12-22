@@ -25,8 +25,6 @@ public class WebActivity extends BaseActivity {
     @Override
     protected void init() {
         String url = getIntent().getStringExtra("url");
-
-
         WebSettings wSet = webView.getSettings();
         wSet.setJavaScriptEnabled(true);
         wSet.setUseWideViewPort(true);
@@ -50,6 +48,8 @@ public class WebActivity extends BaseActivity {
                 break;
             case R.id.home_bt:
                 finish();
+                break;
+            default:
                 break;
         }
     }

@@ -67,7 +67,19 @@ public class QiYeActivity extends BaseActivity implements OnItemCheckListener {
                 return false;
             }
         });
-
+        pageAdapter.setOnItemCheckListener(new OnItemCheckListener() {
+            @Override
+            public void OnItemCheck(RecyclerView.ViewHolder viewHolder, int position) {
+                Page.DataBean data =page.getData().get(position);
+                if (data.getPath().contains(".mp4")) {
+                    startActivity(new Intent(QiYeActivity.this, VideoActivity.class)
+                            .putExtra("url", data.getPath())
+                            .putExtra("name", data.getName()));
+                } else {
+                    startActivity(new Intent(QiYeActivity.this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(position).getPath()));
+                }
+            }
+        });
         postPage("http://112.74.196.237:81/robot_api/public/index.php/api/30/files?key=");
         pageAdapter.setOnItemCheckListener(this);
     }

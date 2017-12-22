@@ -65,9 +65,15 @@
         <activity
             android:name=".activity.ShangWuActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".activity.QiYeActivity" />
-        <activity android:name=".activity.WebActivity"/>
-        <meta-data android:name="com.baidu.speech.APP_ID"
+        <activity
+            android:name=".activity.QiYeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.WebActivity"
+            android:screenOrientation="landscape" />
+
+        <meta-data
+            android:name="com.baidu.speech.APP_ID"
             android:value="10543841" />
         <meta-data
             android:name="com.baidu.speech.API_KEY"
@@ -75,7 +81,12 @@
         <meta-data
             android:name="com.baidu.speech.SECRET_KEY"
             android:value="R914etRqV7vXipuu8G6hr1smPCKC212F" />
-        <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false" />
+
+        <service
+            android:name="com.baidu.speech.VoiceRecognitionService"
+            android:exported="false" />
+
+        <activity android:name=".activity.VideoActivity"></activity>
     </application>
 
 </manifest>
