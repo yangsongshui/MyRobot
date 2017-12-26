@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -34,6 +35,9 @@ public class MainActivity extends BaseActivity {
     EditText phoneEt;
     @BindView(R.id.psw_et)
     EditText pswEt;
+    @BindView(R.id.rl)
+    RelativeLayout rl;
+
     OkHttpClient client;
     Gson gs;
     private ProgressDialog progressDialog;
@@ -55,7 +59,7 @@ public class MainActivity extends BaseActivity {
             public boolean handleMessage(Message msg) {
 
 
-               // showToastor(msg.getData().getString("msg"));
+                // showToastor(msg.getData().getString("msg"));
 
 
                 return false;
@@ -63,7 +67,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.login_bt, R.id.zhuche_bt, R.id.main_back})
+    @OnClick({R.id.login_bt, R.id.zhuche_bt, R.id.main_back,R.id.main_rl})
     public void onViewClicked(View view) {
         play();
         switch (view.getId()) {
@@ -85,7 +89,11 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, ZhuCeActivity.class));
                 break;
             case R.id.main_back:
-                finish();
+                rl.setVisibility(View.GONE);
+                //finish();
+                break;
+            case R.id.main_rl:
+                rl.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
