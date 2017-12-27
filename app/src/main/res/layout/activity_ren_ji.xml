@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:background="@drawable/fangdajing_bt" />
+            android:background="@drawable/yuyin_bbt" />
     </LinearLayout>
 
     <RelativeLayout

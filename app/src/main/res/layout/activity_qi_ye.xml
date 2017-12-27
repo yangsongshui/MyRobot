@@ -33,7 +33,12 @@
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textSize="45sp" />
-
+            <Button
+                android:id="@+id/yuyin_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/yuyin_bbt" />
             <Button
                 android:id="@+id/shousuo_bt"
                 android:layout_width="wrap_content"
