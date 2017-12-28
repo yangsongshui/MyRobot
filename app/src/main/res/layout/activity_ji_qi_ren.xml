@@ -129,13 +129,12 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="100dp"
                 android:background="@drawable/zhuping_bt" />
-
             <Button
-                android:id="@+id/yinxiang_bt"
+                android:id="@+id/kongqi_bt"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="100dp"
-                android:background="@drawable/yinxiang_bt" />
+                android:background="@drawable/kongqi_bt" />
 
             <Button
                 android:id="@+id/pingbi_bt"
@@ -175,13 +174,13 @@
                 android:layout_height="300dp"
                 android:layout_marginTop="100dp"
                 android:background="@drawable/touying_bt" />
-
             <Button
-                android:id="@+id/kongqi_bt"
+                android:id="@+id/yinxiang_bt"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="100dp"
-                android:background="@drawable/kongqi_bt" />
+                android:background="@drawable/yinxiang_bt" />
+
         </LinearLayout>
 
 
