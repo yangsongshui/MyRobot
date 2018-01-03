@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.myrobot.R;
+import com.myrobot.api.Page;
 import com.myrobot.app.MyApplication;
-import com.myrobot.bean.News;
+
+import java.util.List;
 
 import static android.support.v7.widget.RecyclerView.ViewHolder;
 
@@ -20,10 +22,10 @@ import static android.support.v7.widget.RecyclerView.ViewHolder;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
-    News news;
+    List<Page.DataBean> news;
     Context context;
 
-    public NewsAdapter(News news, Context context) {
+    public NewsAdapter(List<Page.DataBean> news, Context context) {
         this.news = news;
         this.context = context;
     }
@@ -36,16 +38,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public int getItemCount() {
-        return news.getShowapi_res_body().getPagebean().getContentlist().size();
+        return news.size();
     }
 
     @Override
     public void onBindViewHolder(NewsViewHolder holder, int position) {
-        News.ShowapiResBodyBean.PagebeanBean.ContentlistBean contentlistBean = news.getShowapi_res_body().getPagebean().getContentlist().get(position);
-        holder.item_tv.setText(contentlistBean.getTitle());
+        Page.DataBean contentlistBean = news.get(position);
+        holder.item_tv.setText(contentlistBean.getName());
         Log.e("onBindViewHolder", contentlistBean.toString());
-        if (contentlistBean.getImageurls().size() > 0)
-            MyApplication.newInstance().getGlide().load(contentlistBean.getImageurls().get(0).getUrl()).centerCrop().into(holder.item_iv);
+        if (contentlistBean.getThumbnail().length() > 0)
+            MyApplication.newInstance().getGlide().load(contentlistBean.getThumbnail()).centerCrop().into(holder.item_iv);
     }
 
     public class NewsViewHolder extends ViewHolder {
@@ -59,7 +61,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         }
     }
 
-    public void setmList(News news) {
+    public void setmList(List<Page.DataBean> news) {
 
         this.news = news;
         this.notifyDataSetChanged();

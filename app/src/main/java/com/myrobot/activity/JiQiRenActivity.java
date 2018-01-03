@@ -84,9 +84,7 @@ public class JiQiRenActivity extends BaseActivity {
                 onOffDialog.show();
                 break;
             case R.id.zhupin_bt:
-
                 onOffDialog.show();
-
                 break;
             case R.id.fenping_bt:
                 onOffDialog.show();

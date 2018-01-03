@@ -2,6 +2,7 @@ package com.myrobot.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -19,9 +20,11 @@ import com.azoft.carousellayoutmanager.DefaultChildSelectionListener;
 import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
+import com.google.gson.Gson;
 import com.myrobot.IRecogListener;
 import com.myrobot.R;
 import com.myrobot.adapter.NewsAdapter;
+import com.myrobot.api.Page;
 import com.myrobot.api.ServiceApi;
 import com.myrobot.base.BaseActivity;
 import com.myrobot.bean.News;
@@ -34,18 +37,21 @@ import com.myrobot.listener.UiMessageListener;
 import com.myrobot.utils.OfflineResource;
 import com.myrobot.utils.RecogResult;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.myrobot.MainHandlerConstant.INIT_SUCCESS;
@@ -96,6 +102,8 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
     // 主控制类，所有合成控制方法从这个类开始
     protected MySyntherizer synthesizer;
     Handler mainHandler;
+    OkHttpClient client;
+    Gson gs;
 
     @Override
     protected int getContentView() {
@@ -104,42 +112,18 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
 
     @Override
     protected void init() {
-
+        client=new OkHttpClient();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("数据查询中...");
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(NESW_URL)
                 .build();
+        gs = new Gson();
         progressDialog.show();
         service = retrofit.create(ServiceApi.class);
-        Call<News> call = service.getNesw("机器人", "1");
-        call.enqueue(new Callback<News>() {
-            @Override
-            public void onResponse(Call<News> call, Response<News> response) {
-                //请求成功操作
-                News news = response.body();
-                if (news.getShowapi_res_code() == 0) {
-                    showToastor("查询成功");
-                    Log.d("news", news.toString());
-                    newsAdapter = new NewsAdapter(news, ShangWuActivity.this);
-                    initRecyclerView(listVertical, new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL, false), newsAdapter);
 
-                } else {
-                    showToastor("查询失败");
-
-                }
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<News> call, Throwable t) {
-                //请求失败操作
-                progressDialog.dismiss();
-                showToastor("查询失败");
-            }
-        });
-        Call<News> call2 = service.getNesw("人工智能", "1");
+        Call<News> call2 = service.getNesw("机器人", "1");
         call2.enqueue(this);
         mainHandler = new Handler() {
 
@@ -155,6 +139,13 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
                     default:
                         break;
                 }
+                if (msg.arg1 == 1) {
+                    showToastor(msg.getData().getString("msg"));
+                    if (page.getData().size() > 0)
+                        getData(page.getData());
+                } else if (msg.arg1==0){
+                    showToastor(msg.getData().getString("msg"));
+                }
 
 
             }
@@ -169,6 +160,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
                     progressDialog.dismiss();
             }
         }, 2000);
+        postPage("http://112.74.196.237:81/robot_api/public/index.php/api/30/files?key=");
     }
 
     private void initRecyclerView(final RecyclerView recyclerView, final CarouselLayoutManager layoutManager, final NewsAdapter adapter) {
@@ -188,8 +180,8 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
             @Override
             public void onCenterItemClicked(@NonNull final RecyclerView recyclerView, @NonNull final CarouselLayoutManager carouselLayoutManager, @NonNull final View v) {
                 final int position = recyclerView.getChildLayoutPosition(v);
-                final String msg = String.format(Locale.US, "Item %1$d was clicked", position);
-                Toast.makeText(ShangWuActivity.this, msg, Toast.LENGTH_SHORT).show();
+                Page.DataBean data = data2.get(position);
+                startActivity(new Intent(ShangWuActivity.this, VideoActivity.class).putExtra("url", data.getPath()));
             }
         }, recyclerView, layoutManager);
 
@@ -303,6 +295,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
         progressDialog.dismiss();
         showToastor("查询失败");
     }
+
     /**
      * 初始化引擎，需要的参数均在InitConfig类里
      * <p>
@@ -409,5 +402,62 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
         Map<String, Object> params = new TreeMap<>();
         myRecognizer.start(params);
         Toast.makeText(this, "请开始说话", Toast.LENGTH_LONG).show();
+    }
+
+    List<Page.DataBean> data2 = new ArrayList<>();
+    Page page;
+
+    private void postPage(String url) {
+        Request request = new Request.Builder().addHeader("Accept", "*/*").url(url).get().build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+                Message msg = new Message();
+                Bundle b = new Bundle();// 存放数据
+                b.putString("msg", "网络异常");
+                msg.setData(b);
+                msg.arg1 = 0;
+                mainHandler.sendMessage(msg);
+                Log.e("js", e.getMessage().toString());
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                String js = response.body().string();
+                Log.e("js", js);
+                page = gs.fromJson(js, Page.class);//把JSON字符串转为对象
+                if (page != null) {
+                    Message msg = new Message();
+                    Bundle b = new Bundle();// 存放数据
+                    if (page.getCode() == 1) {
+                        msg.arg1 = 1;
+                        b.putString("msg", "查询成功");
+                    } else {
+                        msg.arg1 = 0;
+                        b.putString("msg", "查询失败");
+                    }
+                    msg.setData(b);
+                    mainHandler.sendMessage(msg);
+                } else {
+                    Message msg = new Message();
+                    Bundle b = new Bundle();// 存放数据
+                    b.putString("msg", "查询失败");
+                    msg.setData(b);
+                    mainHandler.sendMessage(msg);
+
+                }
+
+            }
+        });
+    }
+
+    private void getData(List<Page.DataBean> data) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getPath().contains(".mp4") || data.get(i).getPath().contains(".avi") || data.get(i).getPath().contains(".flv") || data.get(i).getPath().contains(".rmvb")) {
+                data2.add(data.get(i));
+            }
+        }
+        newsAdapter = new NewsAdapter(data2, ShangWuActivity.this);
+        initRecyclerView(listVertical, new CarouselLayoutManager(CarouselLayoutManager.HORIZONTAL, false), newsAdapter);
     }
 }

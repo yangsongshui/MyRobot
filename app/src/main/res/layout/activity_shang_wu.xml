@@ -29,7 +29,7 @@
 
             <EditText
                 android:id="@+id/msg_et"
-                android:layout_width="1000dp"
+                android:layout_width="900dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:background="@drawable/ed_bg"

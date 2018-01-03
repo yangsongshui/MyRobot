@@ -10,11 +10,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.myrobot.R;
 import com.myrobot.api.User;
 import com.myrobot.base.BaseActivity;
-import com.myrobot.utils.MD5;
 
 import java.io.IOException;
 
@@ -72,8 +70,8 @@ public class MainActivity extends BaseActivity {
         play();
         switch (view.getId()) {
             case R.id.login_bt:
-                //startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                if (!progressDialog.isShowing()) {
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+               /* if (!progressDialog.isShowing()) {
                     progressDialog.show();
                 }
                 String phone = phoneEt.getText().toString();
@@ -81,7 +79,7 @@ public class MainActivity extends BaseActivity {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("phone", phone);
                 jsonObject.addProperty("password", MD5.getMD5(psw));
-                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
+                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());*/
 
                 break;
             case R.id.zhuche_bt:

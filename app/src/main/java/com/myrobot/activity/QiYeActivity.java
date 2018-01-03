@@ -16,10 +16,13 @@ import com.google.gson.Gson;
 import com.myrobot.OnItemCheckListener;
 import com.myrobot.R;
 import com.myrobot.adapter.PageAdapter;
+import com.myrobot.adapter.PageAdapter2;
 import com.myrobot.api.Page;
 import com.myrobot.base.BaseActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,17 +32,22 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class QiYeActivity extends BaseActivity  {
+public class QiYeActivity extends BaseActivity {
 
     @BindView(R.id.msg_et)
     EditText msg_et;
     @BindView(R.id.lv)
     RecyclerView listView;
+    @BindView(R.id.qiye_rv)
+    RecyclerView qiye_rv;
     OkHttpClient client;
     Gson gs;
     Handler handler;
     ProgressDialog progressDialog;
     PageAdapter pageAdapter;
+    PageAdapter2 pageAdapter2;
+    List<Page.DataBean> word = new ArrayList<>();
+    List<Page.DataBean> data2 = new ArrayList<>();
 
     @Override
     protected int getContentView() {
@@ -52,7 +60,6 @@ public class QiYeActivity extends BaseActivity  {
         progressDialog.setMessage("数据查询中...");
         gs = new Gson();
         client = new OkHttpClient();
-        pageAdapter = new PageAdapter(this);
         initView();
         progressDialog.show();
         handler = new Handler(new Handler.Callback() {
@@ -60,27 +67,46 @@ public class QiYeActivity extends BaseActivity  {
             public boolean handleMessage(Message msg) {
                 showToastor(msg.getData().getString("msg"));
                 if (msg.arg1 == 1)
-                    pageAdapter.setItems(page.getData());
+                    //pageAdapter.setItems(page.getData());
+                    if (page.getData().size() > 0)
+                        getData(page.getData());
                 if (progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
                 return false;
             }
         });
+
         pageAdapter.setOnItemCheckListener(new OnItemCheckListener() {
             @Override
             public void OnItemCheck(RecyclerView.ViewHolder viewHolder, int position) {
-                Page.DataBean data = page.getData().get(position);
-                if (data.getPath().contains(".mp4")) {
-                    startActivity(new Intent(QiYeActivity.this, VideoActivity.class).putExtra("url", data.getPath()));
-                } else {
-                    startActivity(new Intent(QiYeActivity.this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + page.getData().get(position).getPath()));
-                }
+                Page.DataBean data = word.get(position);
+                startActivity(new Intent(QiYeActivity.this, WebActivity.class).putExtra("url", "http://dcsapi.com?k=266904417&url=" + data.getPath()));
 
+
+            }
+        });
+        pageAdapter2.setOnItemCheckListener(new OnItemCheckListener() {
+            @Override
+            public void OnItemCheck(RecyclerView.ViewHolder viewHolder, int position) {
+                Page.DataBean data = data2.get(position);
+                startActivity(new Intent(QiYeActivity.this, VideoActivity.class).putExtra("url", data.getPath()));
             }
         });
         postPage("http://112.74.196.237:81/robot_api/public/index.php/api/30/files?key=");
 
+    }
+
+    private void getData(List<Page.DataBean> data) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getPath().contains(".mp4") || data.get(i).getPath().contains(".avi") || data.get(i).getPath().contains(".flv") || data.get(i).getPath().contains(".rmvb")) {
+                data2.add(data.get(i));
+            } else {
+                word.add(data.get(i));
+            }
+        }
+        pageAdapter2.setItems(data2);
+        pageAdapter.setItems(word);
     }
 
     @OnClick({R.id.shousuo_bt, R.id.fanhui_bt, R.id.home_bt})
@@ -154,11 +180,17 @@ public class QiYeActivity extends BaseActivity  {
 
 
     private void initView() {
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(layoutManager);
         pageAdapter = new PageAdapter(this);
         listView.setAdapter(pageAdapter);
+
+        GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
+        layoutManager2.setOrientation(LinearLayoutManager.VERTICAL);
+        qiye_rv.setLayoutManager(layoutManager2);
+        pageAdapter2 = new PageAdapter2(this);
+        qiye_rv.setAdapter(pageAdapter2);
     }
 
 

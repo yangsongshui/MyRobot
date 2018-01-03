@@ -25,7 +25,7 @@
 
             <EditText
                 android:id="@+id/msg_et"
-                android:layout_width="1000dp"
+                android:layout_width="900dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:background="@drawable/ed_bg"
@@ -33,12 +33,14 @@
                 android:maxLines="1"
                 android:paddingStart="15dp"
                 android:textSize="45sp" />
+
             <Button
                 android:id="@+id/yuyin_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:background="@drawable/yuyin_bbt" />
+
             <Button
                 android:id="@+id/shousuo_bt"
                 android:layout_width="wrap_content"
@@ -53,41 +55,52 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="300dp"
             android:layout_marginStart="300dp"
-            android:layout_marginTop="460dp"
+            android:layout_marginTop="300dp"
             android:orientation="vertical">
 
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="80dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="bottom"
-                    android:background="@color/faded_cyan" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/qiye_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="企业数据"
-                    android:textColor="@color/faded_cyan"
-                    android:textSize="35sp"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginStart="15dp"
-                    android:background="@color/faded_cyan" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginStart="50dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="行业热点"
+                            android:textColor="@color/faded_cyan"
+                            android:textSize="35sp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/lv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
             </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/lv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
         </LinearLayout>
 
     </LinearLayout>
