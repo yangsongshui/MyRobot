@@ -112,7 +112,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
 
     @Override
     protected void init() {
-        client=new OkHttpClient();
+        client = new OkHttpClient();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("数据查询中...");
         retrofit = new Retrofit.Builder()
@@ -143,7 +143,7 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
                     showToastor(msg.getData().getString("msg"));
                     if (page.getData().size() > 0)
                         getData(page.getData());
-                } else if (msg.arg1==0){
+                } else if (msg.arg1 == 0) {
                     showToastor(msg.getData().getString("msg"));
                 }
 
@@ -223,11 +223,19 @@ public class ShangWuActivity extends BaseActivity implements Callback<News> {
 
     }
 
+    int indext = 1;
+
     @OnClick({R.id.shuaxin, R.id.yuyin_bt, R.id.shousuo_bt, R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5, R.id.bt_6, R.id.fanhui_bt, R.id.home_bt})
     public void onViewClicked(View view) {
         play();
         switch (view.getId()) {
             case R.id.shuaxin:
+                if (indext > 20) {
+                    indext = 0;
+                }
+                indext++;
+                Call<News> call2 = service.getNesw("机器人", String.valueOf(indext));
+                call2.enqueue(this);
                 break;
             case R.id.shousuo_bt:
                 if (!msg_et.getText().toString().equals("")) {
