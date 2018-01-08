@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.login_bt:
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
-               /* if (!progressDialog.isShowing()) {
+             /*   if (!progressDialog.isShowing()) {
                     progressDialog.show();
                 }
                 String phone = phoneEt.getText().toString();
@@ -79,8 +79,8 @@ public class MainActivity extends BaseActivity {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("phone", phone);
                 jsonObject.addProperty("password", MD5.getMD5(psw));
-                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());*/
-
+                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
+*/
                 break;
             case R.id.zhuche_bt:
 

@@ -7,10 +7,36 @@
     android:background="@drawable/qiye_bg"
     tools:context="com.myrobot.activity.QiYeActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/user_kuang"
+                android:gravity="center"
+                android:text="企业:"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-20dp"
+                android:background="@drawable/user_kuang2"
+                android:gravity="center"
+                android:text="深圳市前海超体智能科技有限公司"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/sousuo_ll"
@@ -72,8 +98,8 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -82,13 +108,14 @@
                         android:layout_marginEnd="50dp"
                         android:layout_marginStart="50dp"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:text="行业热点"
                             android:textColor="@color/faded_cyan"
-                            android:textSize="35sp"
+                            android:textSize="45sp"
                             android:textStyle="bold" />
 
 
