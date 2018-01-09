@@ -47,6 +47,10 @@ public class CommomDialog extends Dialog implements View.OnClickListener {
                 dismiss();
             }
         });
+        findViewById(R.id.shang_bt).setOnClickListener(this);
+        findViewById(R.id.you_bt).setOnClickListener(this);
+        findViewById(R.id.xia_bt).setOnClickListener(this);
+        findViewById(R.id.zuo_bt).setOnClickListener(this);
     }
 
     private void initView() {
@@ -59,7 +63,7 @@ public class CommomDialog extends Dialog implements View.OnClickListener {
         if (onClickListener != null) {
             onClickListener.onClick(v);
         }
-        this.dismiss();
+      //  this.dismiss();
     }
 
     public void setOnClickListener(View.OnClickListener onClickListener) {

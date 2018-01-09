@@ -29,11 +29,13 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/xiao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/xiao" />
 
             <SeekBar
+                android:id="@+id/seekbar"
                 android:layout_width="800dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -42,12 +44,14 @@
                 android:thumb="@drawable/jv11" />
 
             <ImageView
+                android:id="@+id/da"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/da" />
         </LinearLayout>
 
         <CheckBox
+            android:id="@+id/vol_chekbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

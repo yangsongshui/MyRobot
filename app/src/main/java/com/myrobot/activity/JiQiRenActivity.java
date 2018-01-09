@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.myrobot.R;
@@ -33,7 +35,7 @@ import android_serialport_api.SerialPortFinder;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class JiQiRenActivity extends BaseActivity {
+public class JiQiRenActivity extends BaseActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener {
 
 
     @BindView(R.id.home_name)
@@ -57,8 +59,10 @@ public class JiQiRenActivity extends BaseActivity {
     SerialControl ComA;
     DispQueueThread DispQueue;//刷新显示线程
     SerialPortFinder mSerialPortFinder;//串口设备搜索
-
     AssistBean AssistData;//用于界面数据序列化和反序列化
+    String type = "0";
+    String onoff = "1";
+    String control = "1";
 
     @Override
     protected int getContentView() {
@@ -73,7 +77,7 @@ public class JiQiRenActivity extends BaseActivity {
         AssistData = getAssistData();
         dialog = new CommomDialog(this, R.style.dialog);
         onOffDialog = new OnOffDialog(this, R.style.dialog);
-        volumeDialog = new VolumeDialog(this, R.style.dialog);
+        volumeDialog = new VolumeDialog(this, R.style.dialog, this);
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         operatingAnim2 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim2);
         operatingAnim3 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
@@ -97,6 +101,7 @@ public class JiQiRenActivity extends BaseActivity {
         ComA.setPort("/dev/ttyS4");
         ComA.setBaudRate("9600");
         OpenComPort(ComA);
+        dialogListen();
     }
 
 
@@ -106,32 +111,41 @@ public class JiQiRenActivity extends BaseActivity {
         play();
         switch (view.getId()) {
             case R.id.lianwang_bt:
-                sendPortData(ComA,"[51000000000000@0200000]");
+                // sendPortData(ComA,"[51000000000000@0200000]");
                 break;
             case R.id.shexiang_bt:
+                type = "05";
                 dialog.show();
-                sendPortData(ComA,"[51000000000000@0210000]");
+                //  sendPortData(ComA, "[51000000000000@0210000]");
                 break;
             case R.id.zhuping_bt:
-                sendPortData(ComA,"[51000000000000@0300000]");
+                type = "02";
+                // sendPortData(ComA, "[51000000000000@0300000]");
                 dialog.show();
                 break;
             case R.id.yinxiang_bt:
+                type = "08";
                 volumeDialog.show();
                 break;
             case R.id.pingbi_bt:
+                type = "07";
                 onOffDialog.show();
                 break;
             case R.id.zhupin_bt:
+                type = "02";
                 onOffDialog.show();
                 break;
             case R.id.fenping_bt:
+                type = "03";
                 onOffDialog.show();
                 break;
             case R.id.touying_bt:
+                type = "05";
                 onOffDialog.show();
                 break;
             case R.id.kongqi_bt:
+                //两侧配件
+                type = "14";
                 dialog.show();
                 break;
             case R.id.fanhui_bt:
@@ -152,6 +166,7 @@ public class JiQiRenActivity extends BaseActivity {
         shun2.clearAnimation();
         ni1.clearAnimation();
         ni2.clearAnimation();
+        CloseComPort(ComA);
     }
 
     //----------------------------------------------------串口控制类
@@ -169,7 +184,8 @@ public class JiQiRenActivity extends BaseActivity {
             //直接刷新显示，接收数据量大时，卡顿明显，但接收与显示同步。
             //用线程定时刷新显示可以获得较流畅的显示效果，但是接收数据速度快于显示速度时，显示会滞后。
             //最终效果差不多-_-，线程定时刷新稍好一些。
-            DispQueue.AddQueue(ComRecData);//线程定时刷新显示(推荐)
+            //线程定时刷新显示(推荐)
+            DispQueue.AddQueue(ComRecData);
             /*
             runOnUiThread(new Runnable()//直接刷新显示
 			{
@@ -241,6 +257,14 @@ public class JiQiRenActivity extends BaseActivity {
         return AssistData;
     }
 
+    //----------------------------------------------------关闭串口
+    private void CloseComPort(SerialHelper ComPort) {
+        if (ComPort != null) {
+            ComPort.stopSend();
+            ComPort.close();
+        }
+    }
+
     //----------------------------------------------------打开串口
     private void OpenComPort(SerialHelper ComPort) {
         try {
@@ -261,5 +285,61 @@ public class JiQiRenActivity extends BaseActivity {
             ComPort.sendTxt(sOut);
 
         }
+    }
+
+    private void dialogListen() {
+        dialog.setOnClickListener(this);
+        onOffDialog.setOnClickListener(this);
+        volumeDialog.setOnClickListener(this);
+        volumeDialog.setOnClick(this);
+    }
+
+    //上下左右监听
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.shang_bt:
+                control="1";
+                break;
+            case R.id.you_bt:
+                control="4";
+                break;
+            case R.id.xia_bt:
+                control="2";
+                break;
+            case R.id.zuo_bt:
+                control="3";
+                break;
+            case R.id.da:
+                control="5";
+                break;
+            case R.id.xiao:
+                control="6";
+                break;
+        }
+        sendPortData(ComA,"[51000000000000@"+type+onoff+control+"000]");
+    }
+
+    //开关监听 音量开关
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        onoff = b ? "1" : "0";
+        sendPortData(ComA,"[51000000000000@"+type+onoff+control+"000]");
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    //拖动条
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
     }
 }

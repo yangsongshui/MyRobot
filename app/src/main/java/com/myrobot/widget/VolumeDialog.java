@@ -7,7 +7,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 
 import com.myrobot.R;
 
@@ -16,18 +19,21 @@ import com.myrobot.R;
  * Created by ys on 2017/9/1.
  */
 
-public class VolumeDialog extends Dialog implements View.OnClickListener {
+public class VolumeDialog extends Dialog implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     ImageButton zhuche_back;
-    View.OnClickListener onClickListener;
-    private Context mContext;
 
+    private Context mContext;
+    SeekBar.OnSeekBarChangeListener onSeekBarChangeListener;
+    CompoundButton.OnCheckedChangeListener onCheckedChangeListener;
+    View.OnClickListener onClickListener;
     public VolumeDialog(@NonNull Context context) {
         super(context);
     }
 
-    public VolumeDialog(@NonNull Context context, @StyleRes int themeResId) {
+    public VolumeDialog(@NonNull Context context, @StyleRes int themeResId, SeekBar.OnSeekBarChangeListener onSeekBarChangeListener) {
         super(context, themeResId);
+        this.onSeekBarChangeListener = onSeekBarChangeListener;
     }
 
     protected VolumeDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
@@ -40,31 +46,39 @@ public class VolumeDialog extends Dialog implements View.OnClickListener {
 
         setContentView(R.layout.dialog_volume);
         setCanceledOnTouchOutside(true);
-        initView();
+
         findViewById(R.id.zhuche_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
+        findViewById(R.id.da).setOnClickListener(this);
+        findViewById(R.id.xiao).setOnClickListener(this);
+        ((SeekBar) findViewById(R.id.seekbar)).setOnSeekBarChangeListener(onSeekBarChangeListener);
+        ((CheckBox) findViewById(R.id.vol_chekbox)).setOnCheckedChangeListener(this);
     }
 
-    private void initView() {
 
 
+
+    public void setOnClickListener(CompoundButton.OnCheckedChangeListener onCheckedChangeListener) {
+        this.onCheckedChangeListener = onCheckedChangeListener;
     }
 
     @Override
-    public void onClick(View v) {
-        if (onClickListener != null) {
-            onClickListener.onClick(v);
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (onCheckedChangeListener != null) {
+            onCheckedChangeListener.onCheckedChanged(compoundButton, b);
         }
-        this.dismiss();
     }
-
-    public void setOnClickListener(View.OnClickListener onClickListener) {
+    public void setOnClick(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
-
-
+    @Override
+    public void onClick(View view) {
+        if (onClickListener != null) {
+            onClickListener.onClick(view);
+        }
+    }
 }

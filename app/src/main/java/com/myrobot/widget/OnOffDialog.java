@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 
 import com.myrobot.R;
@@ -16,10 +18,10 @@ import com.myrobot.R;
  * Created by ys on 2017/9/1.
  */
 
-public class OnOffDialog extends Dialog implements View.OnClickListener {
+public class OnOffDialog extends Dialog implements CompoundButton.OnCheckedChangeListener {
 
     ImageButton zhuche_back;
-    View.OnClickListener onClickListener;
+    CompoundButton.OnCheckedChangeListener onCheckedChangeListener;
     private Context mContext;
 
     public OnOffDialog(@NonNull Context context) {
@@ -40,31 +42,26 @@ public class OnOffDialog extends Dialog implements View.OnClickListener {
 
         setContentView(R.layout.dialog_onoff);
         setCanceledOnTouchOutside(true);
-        initView();
+
         findViewById(R.id.zhuche_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
+        ((CheckBox) findViewById(R.id.onoff_check)).setOnCheckedChangeListener(this);
     }
 
-    private void initView() {
 
-
+    public void setOnClickListener(CompoundButton.OnCheckedChangeListener onCheckedChangeListener) {
+        this.onCheckedChangeListener = onCheckedChangeListener;
     }
+
 
     @Override
-    public void onClick(View v) {
-        if (onClickListener != null) {
-            onClickListener.onClick(v);
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (onCheckedChangeListener != null) {
+            onCheckedChangeListener.onCheckedChanged(compoundButton, b);
         }
-        this.dismiss();
     }
-
-    public void setOnClickListener(View.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-
 }
