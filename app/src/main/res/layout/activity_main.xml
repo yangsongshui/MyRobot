@@ -13,17 +13,17 @@
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="1800dp"
-        android:visibility="gone"
         android:layout_height="1050dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/kuang">
+        android:background="@drawable/kuang"
+        android:visibility="gone">
 
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
             android:src="@drawable/login" />
 
         <LinearLayout
@@ -36,9 +36,9 @@
                 android:id="@+id/ed_ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="true"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="30dp"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -72,8 +72,8 @@
                 android:id="@+id/ed_ll2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:layout_marginStart="280dp"
+                android:layout_marginTop="40dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical"
@@ -128,6 +128,12 @@
                     android:textSize="50dp" />
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/zhiwenbt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/zhiwenbt" />
         </LinearLayout>
     </RelativeLayout>
 

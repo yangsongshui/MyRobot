@@ -16,13 +16,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp">
+            android:layout_marginTop="350dp"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/user_kuang"
                 android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:text="企业:"
                 android:textColor="@color/white"
                 android:textSize="60sp" />
@@ -30,10 +33,93 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-20dp"
+                android:layout_marginStart="-50dp"
                 android:background="@drawable/user_kuang2"
                 android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingEnd="60dp"
+                android:paddingStart="80dp"
+                android:paddingTop="5dp"
                 android:text="深圳市前海超体智能科技有限公司"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:background="@drawable/user_kuang"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="用户:"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-50dp"
+                android:background="@drawable/user_kuang2"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingEnd="60dp"
+                android:paddingStart="80dp"
+                android:paddingTop="5dp"
+                android:text="黄达成"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:background="@drawable/user_kuang"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="部门:"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-50dp"
+                android:background="@drawable/user_kuang2"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingEnd="60dp"
+                android:paddingStart="80dp"
+                android:paddingTop="5dp"
+                android:text="设计部"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:background="@drawable/user_kuang"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+
+                android:paddingTop="5dp"
+                android:text="权限:"
+                android:textColor="@color/white"
+                android:textSize="60sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-50dp"
+                android:background="@drawable/user_kuang2"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingEnd="60dp"
+                android:paddingStart="80dp"
+                android:paddingTop="5dp"
+                android:text="一级"
                 android:textColor="@color/white"
                 android:textSize="60sp" />
         </LinearLayout>
@@ -43,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="450dp"
+            android:layout_marginTop="250dp"
             android:background="@drawable/shangwu_et"
             android:focusable="true"
             android:focusableInTouchMode="true"
