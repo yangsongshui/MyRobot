@@ -88,6 +88,13 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sendPortData(ComA, "[51000000000000@0110000]");
+            }
+        }, 2000);
+        sendPortData(ComA, "[51000000000000@0900100]");
     }
 
     @OnClick({R.id.login_bt, R.id.zhuche_bt, R.id.main_back, R.id.main_rl, R.id.zhiwenbt})
@@ -95,8 +102,8 @@ public class MainActivity extends BaseActivity {
         play();
         switch (view.getId()) {
             case R.id.login_bt:
-                // startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                if (!progressDialog.isShowing()) {
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            /*    if (!progressDialog.isShowing()) {
                     progressDialog.show();
                 }
                 String phone = phoneEt.getText().toString();
@@ -104,7 +111,7 @@ public class MainActivity extends BaseActivity {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("phone", phone);
                 jsonObject.addProperty("password", MD5.getMD5(psw));
-                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
+                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());*/
 
                 break;
             case R.id.zhuche_bt:
@@ -223,30 +230,45 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    String str = "";
+    boolean login = false;
+
     //----------------------------------------------------显示接收数据
     private void DispRecData(ComBean ComRecData) {
         StringBuilder sMsg = new StringBuilder();
-        sMsg.append("[");
-        sMsg.append(ComRecData.sComPort);
-        sMsg.append("]");
         sMsg.append(new String(ComRecData.bRec));
         Log.e("收到数据", sMsg.toString());
-        if (sMsg.indexOf("@") != -1) {
-            String msg = sMsg.substring(sMsg.indexOf("@") + 1, sMsg.length());
-            String userid = msg.substring(1, 3);
-            if (msg.substring(9, 10).equals("3")) {
-                String phone = SpUtils.getString(userid + "phone", "");
-                String psw = SpUtils.getString(userid + "psw", "");
-                JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("phone", phone);
-                jsonObject.addProperty("password", MD5.getMD5(psw));
-                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
-            } else {
-                showToastor("指纹识别失败");
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
+        if (sMsg.indexOf("[") != -1) {
+            str = sMsg.toString();
+        } else if (sMsg.indexOf("]") != -1 && str.length() > 1) {
+            str = str + sMsg.toString();
+            Log.e("zhiwen", str);
+            if (str.contains("@")) {
+                String msg = str.substring(str.indexOf("@") + 1, str.length() - 1);
+                String userid = msg.substring(1, 3);
+                Log.e("info", userid + " " + msg.substring(10, 11) + " " + msg);
+                if (msg.substring(10, 11).equals("3")) {
+                    String phone = SpUtils.getString(userid + "phone", "");
+                    String psw = SpUtils.getString(userid + "psw", "");
+                    Log.e("info", phone + " " + psw);
+                    if (!phone.isEmpty() && !psw.isEmpty() && !login) {
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("phone", phone);
+                        jsonObject.addProperty("password", MD5.getMD5(psw));
+                        post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
+                    }else {
+                        showToastor("无本地账号");
+                    }
 
+                    str = "";
+                } else {
+                    showToastor("指纹识别失败");
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+
+                }
+                str = "";
             }
         }
 
@@ -297,6 +319,18 @@ public class MainActivity extends BaseActivity {
             ComPort.sendTxt(sOut);
 
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DispQueue.interrupt();
+        try {
+            DispQueue.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        CloseComPort(ComA);
     }
 
     @Override

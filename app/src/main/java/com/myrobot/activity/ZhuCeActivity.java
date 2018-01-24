@@ -1,11 +1,8 @@
 package com.myrobot.activity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,15 +17,12 @@ import com.myrobot.R;
 import com.myrobot.api.Code;
 import com.myrobot.api.User;
 import com.myrobot.base.BaseActivity;
-import com.myrobot.bean.AssistBean;
 import com.myrobot.bean.ComBean;
 import com.myrobot.utils.MD5;
 import com.myrobot.utils.SerialHelper;
 import com.myrobot.utils.SpUtils;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -96,30 +90,16 @@ public class ZhuCeActivity extends BaseActivity {
                     showToastor(user.getMsg());
                     if (user.getCode() == 1) {
                         sendPortData(ComA, "[51000000000000@10000" + userid + "]");
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                sendPortData(ComA, "[51000000000000@10000" + userid + "]");
-                            }
-                        }, 200);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                sendPortData(ComA, "[51000000000000@10000" + userid + "]");
-                            }
-                        }, 400);
-                        SpUtils.putString(userid + "phone", phoneEt.getText().toString().trim());
-                        SpUtils.putString(userid + "psw", pswEt.getText().toString().trim());
-                        id++;
-                        SpUtils.putInt("id", id);
+
+
                     }
                 } else if (msg.arg1 == 2) {
                     showToastor("网络异常");
                 } else if (msg.arg1 == 3) {
                     showToastor((String) msg.obj);
                 }
-                relativeLayout.setVisibility(View.VISIBLE);
-                zhuche_back.setVisibility(View.VISIBLE);
+                // relativeLayout.setVisibility(View.VISIBLE);
+                // zhuche_back.setVisibility(View.VISIBLE);
                 zhiwen.setVisibility(View.GONE);
                 return false;
             }
@@ -153,13 +133,14 @@ public class ZhuCeActivity extends BaseActivity {
                 jsonObject.addProperty("fingerprint", String.valueOf(numcode));
                 jsonObject.addProperty("robot_mac", "80984093298574");
                 postZhuce("http://112.74.196.237:81/robot_api/public/index.php/users/register?", jsonObject.toString());
+
+
                 break;
             case R.id.get_code:
                 String phone = phoneEt.getText().toString();
                 jsonObject = new JsonObject();
                 jsonObject.addProperty("phone", phone);
                 postCoed("http://112.74.196.237:81/robot_api/public/index.php/users/vcode?", jsonObject.toString());
-
 
                 break;
         }
@@ -194,13 +175,13 @@ public class ZhuCeActivity extends BaseActivity {
     private void postZhuce(String url, final String json) {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder().addHeader("Accept", "*/*").url(url).post(body).build();
-
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Message msg = new Message();
                 msg.arg1 = 2;
                 handler.sendMessage(msg);
+                Log.e("onFailure", e.toString());
 
             }
 
@@ -213,7 +194,6 @@ public class ZhuCeActivity extends BaseActivity {
                 msg.arg1 = 1;
                 msg.setData(b);
                 handler.sendMessage(msg);
-
             }
         });
     }
@@ -276,33 +256,46 @@ public class ZhuCeActivity extends BaseActivity {
         }
     }
 
+    String str = "";
+
     //----------------------------------------------------显示接收数据
     private void DispRecData(ComBean ComRecData) {
         StringBuilder sMsg = new StringBuilder();
-        sMsg.append("[");
-        sMsg.append(ComRecData.sComPort);
-        sMsg.append("]");
         sMsg.append(new String(ComRecData.bRec));
-        Log.e("收到数据", sMsg.toString());
-        if (sMsg.indexOf("@") != -1)
-            finish();
+        if (sMsg.indexOf("[") != -1) {
+            str = sMsg.toString();
+        } else if (sMsg.indexOf("]") != -1 && str.length() > 1) {
+            str = str + sMsg.toString();
+            Log.e("zhiwen1", str);
+            if (str.contains("@")) {
+                String msg = str.substring(str.indexOf("@") + 1, str.length() - 1);
+                Log.e("zhiwen2", msg);
+                String zhiwen = msg.substring(10, 11);
+                String str = msg.substring(11, 12);
+                Log.e("zhiwen3", msg + " " + zhiwen + " " + str);
+                if (zhiwen.equals("1")) {
+                    if (str.equals("0") || str.equals("2")) {
+                        showToastor("再次识别指纹");
+                        sendPortData(ComA, "[51000000000000@10000" + userid + "]");
+                    } else if (str.equals("4")) {
+                        SpUtils.putString(userid + "phone", phoneEt.getText().toString().trim());
+                        SpUtils.putString(userid + "psw", pswEt.getText().toString().trim());
+                        id++;
+                        SpUtils.putInt("id", id);
+                        showToastor("注册成功");
+                        finish();
+                    } else if (str.equals("1") || str.equals("3") || str.equals("5")) {
+                        showToastor("重按手指");
+                        //sendPortData(ComA, "[51000000000000@10000" + userid + "]");
+                    }
 
-    }
-
-    private AssistBean getAssistData() {
-        SharedPreferences msharedPreferences = getSharedPreferences("ComAssistant", Context.MODE_PRIVATE);
-        AssistBean AssistData = new AssistBean();
-        try {
-            String personBase64 = msharedPreferences.getString("AssistData", "");
-            byte[] base64Bytes = Base64.decode(personBase64.getBytes(), 0);
-            ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            AssistData = (AssistBean) ois.readObject();
-            return AssistData;
-        } catch (Exception e) {
-            e.printStackTrace();
+                }
+            }
+            str = "";
         }
-        return AssistData;
+
+        //  finish();
+
     }
 
     //----------------------------------------------------关闭串口
@@ -329,6 +322,7 @@ public class ZhuCeActivity extends BaseActivity {
 
     //----------------------------------------------------串口发送
     private void sendPortData(SerialHelper ComPort, String sOut) {
+        Log.e("sendPortData", sOut);
         if (ComPort != null && ComPort.isOpen()) {
             ComPort.sendTxt(sOut);
 

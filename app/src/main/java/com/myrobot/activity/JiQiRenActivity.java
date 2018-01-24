@@ -2,15 +2,16 @@ package com.myrobot.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.myrobot.R;
@@ -35,7 +36,7 @@ import android_serialport_api.SerialPortFinder;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class JiQiRenActivity extends BaseActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener {
+public class JiQiRenActivity extends BaseActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
 
 
     @BindView(R.id.home_name)
@@ -63,6 +64,7 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
     String type = "0";
     String onoff = "1";
     String control = "1";
+    Handler handler;
 
     @Override
     protected int getContentView() {
@@ -71,13 +73,14 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void init() {
+        handler = new Handler();
         ComA = new SerialControl();
         DispQueue = new DispQueueThread();
         DispQueue.start();
         AssistData = getAssistData();
         dialog = new CommomDialog(this, R.style.dialog);
         onOffDialog = new OnOffDialog(this, R.style.dialog);
-        volumeDialog = new VolumeDialog(this, R.style.dialog, this);
+        volumeDialog = new VolumeDialog(this, R.style.dialog);
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
         operatingAnim2 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim2);
         operatingAnim3 = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
@@ -111,16 +114,14 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
         play();
         switch (view.getId()) {
             case R.id.lianwang_bt:
-                // sendPortData(ComA,"[51000000000000@0200000]");
                 break;
             case R.id.shexiang_bt:
-                type = "05";
+                type = "04";
                 dialog.show();
-                //  sendPortData(ComA, "[51000000000000@0210000]");
                 break;
             case R.id.zhuping_bt:
-                type = "02";
-                // sendPortData(ComA, "[51000000000000@0300000]");
+                type = "06";
+
                 dialog.show();
                 break;
             case R.id.yinxiang_bt:
@@ -145,7 +146,7 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.kongqi_bt:
                 //两侧配件
-                type = "14";
+                type = "07";
                 dialog.show();
                 break;
             case R.id.fanhui_bt:
@@ -168,6 +169,49 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
         ni2.clearAnimation();
         CloseComPort(ComA);
     }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        int time = 500;
+        switch (v.getId()) {
+
+            case R.id.shang_bt:
+                control = "1";
+                break;
+            case R.id.you_bt:
+                time = 1000;
+                control = "4";
+                break;
+            case R.id.xia_bt:
+                control = "2";
+                break;
+            case R.id.zuo_bt:
+                time = 1000;
+                control = "3";
+                break;
+        }
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.e("TAG", "ACTION_DOWN");
+                onoff = "1";
+                break;
+            case MotionEvent.ACTION_UP:
+                onoff = "0";
+                control = "0";
+                Log.e("TAG", "ACTION_UP");
+                break;
+        }
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sendPortData(ComA, "[51000000000000@" + type + onoff + control + "000]");
+            }
+        }, time);
+        sendPortData(ComA, "[51000000000000@" + type + onoff + control + "000]");
+        return false;
+    }
+
 
     //----------------------------------------------------串口控制类
     private class SerialControl extends SerialHelper {
@@ -281,6 +325,7 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
 
     //----------------------------------------------------串口发送
     private void sendPortData(SerialHelper ComPort, String sOut) {
+        Log.e("写入数据", sOut);
         if (ComPort != null && ComPort.isOpen()) {
             ComPort.sendTxt(sOut);
 
@@ -288,9 +333,8 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void dialogListen() {
-        dialog.setOnClickListener(this);
+        dialog.setOnTouchListener(this);
         onOffDialog.setOnClickListener(this);
-        volumeDialog.setOnClickListener(this);
         volumeDialog.setOnClick(this);
     }
 
@@ -298,48 +342,27 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.shang_bt:
-                control="1";
-                break;
-            case R.id.you_bt:
-                control="4";
-                break;
-            case R.id.xia_bt:
-                control="2";
-                break;
-            case R.id.zuo_bt:
-                control="3";
-                break;
             case R.id.da:
-                control="5";
+                control = "5";
                 break;
             case R.id.xiao:
-                control="6";
+                control = "6";
+                break;
+            case R.id.vol_chekbox:
+                onoff = "0";
+                control = "9";
                 break;
         }
-        sendPortData(ComA,"[51000000000000@"+type+onoff+control+"000]");
+        sendPortData(ComA, "[51000000000000@" + type + onoff + control + "000]");
     }
 
     //开关监听 音量开关
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        control = "0";
         onoff = b ? "1" : "0";
-        sendPortData(ComA,"[51000000000000@"+type+onoff+control+"000]");
+        sendPortData(ComA, "[51000000000000@" + type + onoff + control + "000]");
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    //拖动条
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
-    }
 }

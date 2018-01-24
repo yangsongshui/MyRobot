@@ -19,45 +19,41 @@
         android:layout_height="match_parent"
         android:layout_marginTop="150dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:gravity="center"
-            android:background="@drawable/yingliang_kuang"
+            android:background="@drawable/yingliang_bg"
             android:orientation="horizontal">
 
-            <ImageView
+            <Button
                 android:id="@+id/xiao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/xiao" />
+                android:layout_marginStart="100dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/xiao_bt" />
 
-            <SeekBar
-                android:id="@+id/seekbar"
-                android:layout_width="800dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="20dp"
-                android:progressDrawable="@drawable/jv110"
-                android:thumb="@drawable/jv11" />
 
-            <ImageView
+            <Button
                 android:id="@+id/da"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/da" />
-        </LinearLayout>
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="100dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/da_bt" />
+        </RelativeLayout>
 
-        <CheckBox
+        <Button
             android:id="@+id/vol_chekbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="50dp"
-            android:background="@drawable/vol_cb"
+            android:background="@drawable/jingyin_bt"
             android:button="@null" />
     </RelativeLayout>
 </RelativeLayout>

@@ -31,7 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/zhongxin"
-
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/shang_bt" />
 
@@ -40,6 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:layout_toEndOf="@+id/zhongxin"
             android:background="@drawable/you_bt" />
 
@@ -47,6 +50,8 @@
             android:id="@+id/xia_bt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:layout_below="@+id/zhongxin"
             android:layout_centerHorizontal="true"
             android:background="@drawable/xia_bt" />
@@ -55,7 +60,8 @@
             android:id="@+id/zuo_bt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:background="@drawable/zuo_bt"
             android:layout_alignBottom="@+id/you_bt"
             android:layout_toStartOf="@+id/zhongxin" />
