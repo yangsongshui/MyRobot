@@ -12,40 +12,19 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/zu_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/fenzu"
             android:gravity="center"
             android:text="分组一"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="60sp" />
 
-        <ImageButton
-            android:id="@+id/add_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/zikuang"
-            android:padding="10dp"
-            android:src="@drawable/add_bt" />
+        <ListView
+            android:id="@+id/zu_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/add_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/zikuang"
-            android:padding="10dp"
-            android:src="@drawable/add_bt" />
-
-        <ImageButton
-            android:id="@+id/add_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/zikuang"
-            android:padding="10dp"
-            android:src="@drawable/add_bt" />
     </LinearLayout>
 </LinearLayout>

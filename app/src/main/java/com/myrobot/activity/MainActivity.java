@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.myrobot.R;
 import com.myrobot.api.User;
+import com.myrobot.app.MyApplication;
 import com.myrobot.base.BaseActivity;
 import com.myrobot.bean.AssistBean;
 import com.myrobot.bean.ComBean;
@@ -102,8 +103,8 @@ public class MainActivity extends BaseActivity {
         play();
         switch (view.getId()) {
             case R.id.login_bt:
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-            /*    if (!progressDialog.isShowing()) {
+                // startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                if (!progressDialog.isShowing()) {
                     progressDialog.show();
                 }
                 String phone = phoneEt.getText().toString();
@@ -111,7 +112,7 @@ public class MainActivity extends BaseActivity {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("phone", phone);
                 jsonObject.addProperty("password", MD5.getMD5(psw));
-                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());*/
+                post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
 
                 break;
             case R.id.zhuche_bt:
@@ -151,18 +152,15 @@ public class MainActivity extends BaseActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 String js = response.body().string();
                 User user = gs.fromJson(js, User.class);//把JSON字符串转为对象
-          /*      Message msg = new Message();
-                Bundle b = new Bundle();// 存放数据*/
                 if (user != null) {
-                 /*   b.putString("msg", user.getMsg());
-                    msg.setData(b);
-                    handler.sendMessage(msg);*/
                     if (user.getCode() == 1) {
+                        MyApplication.newInstance().setUser(user);
                         startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                        Log.e("TAG",user.toString());
+                        finish();
                     }
                 } else {
-                  /*  b.putString("msg", "数据获取失败");
-                    msg.setData(b);*/
+
                 }
                 if (progressDialog.isShowing()) {
                     progressDialog.dismiss();
@@ -256,7 +254,7 @@ public class MainActivity extends BaseActivity {
                         jsonObject.addProperty("phone", phone);
                         jsonObject.addProperty("password", MD5.getMD5(psw));
                         post("http://112.74.196.237:81/robot_api/public/index.php/users/login?", jsonObject.toString());
-                    }else {
+                    } else {
                         showToastor("无本地账号");
                     }
 

@@ -6,6 +6,7 @@ import android.app.Application;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.inpor.fmctv.application.HstApplication;
+import com.myrobot.api.User;
 import com.myrobot.utils.AppContextUtil;
 import com.myrobot.utils.SpUtils;
 
@@ -21,7 +22,7 @@ public class MyApplication extends Application {
 
     private static MyApplication instance;
     public static List<Activity> activitiesList = new ArrayList<Activity>(); // 活动管理集合
-
+    private User user;
 
 
     /**
@@ -85,4 +86,11 @@ public class MyApplication extends Application {
 
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

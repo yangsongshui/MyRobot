@@ -9,8 +9,8 @@ public class User {
 
     /**
      * code : 1
-     * msg : 注册成功
-     * data : {"id":1,"phone":"18017050138","name":"","sex":null,"company_name":null,"fingerprint":null,"robot_mac":null,"parent_id":0,"department_id":0,"department_name":null,"role_id":0,"role_name":null}
+     * msg : success
+     * data : {"id":30,"phone":"18664570155","name":"","sex":0,"company_name":null,"fingerprint":null,"robot_mac":null,"parent_id":0,"department_id":0,"department_name":null,"role_id":0,"role_name":null}
      */
 
     private int code;
@@ -43,10 +43,10 @@ public class User {
 
     public static class DataBean {
         /**
-         * id : 1
-         * phone : 18017050138
+         * id : 30
+         * phone : 18664570155
          * name :
-         * sex : null
+         * sex : 0
          * company_name : null
          * fingerprint : null
          * robot_mac : null
@@ -60,7 +60,7 @@ public class User {
         private int id;
         private String phone;
         private String name;
-        private Object sex;
+        private int sex;
         private Object company_name;
         private Object fingerprint;
         private Object robot_mac;
@@ -94,11 +94,11 @@ public class User {
             this.name = name;
         }
 
-        public Object getSex() {
+        public int getSex() {
             return sex;
         }
 
-        public void setSex(Object sex) {
+        public void setSex(int sex) {
             this.sex = sex;
         }
 
@@ -166,5 +166,31 @@ public class User {
             this.role_name = role_name;
         }
 
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "id=" + id +
+                    ", phone='" + phone + '\'' +
+                    ", name='" + name + '\'' +
+                    ", sex=" + sex +
+                    ", company_name=" + company_name +
+                    ", fingerprint=" + fingerprint +
+                    ", robot_mac=" + robot_mac +
+                    ", parent_id=" + parent_id +
+                    ", department_id=" + department_id +
+                    ", department_name=" + department_name +
+                    ", role_id=" + role_id +
+                    ", role_name=" + role_name +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
     }
 }
