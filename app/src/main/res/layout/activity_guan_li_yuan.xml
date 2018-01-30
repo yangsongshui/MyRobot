@@ -54,7 +54,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:padding="20dp"
-                        android:text="用户名称:"
+                        android:text="用户手机号:"
                         android:textColor="@color/trout2"
                         android:textSize="30dp" />
 
