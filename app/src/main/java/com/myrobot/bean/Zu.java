@@ -1,12 +1,13 @@
 package com.myrobot.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by yangsong on 2018/1/28.
  */
 
-public class Zu {
+public class Zu implements Serializable{
 
     /**
      * code : 1

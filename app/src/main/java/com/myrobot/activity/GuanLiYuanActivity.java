@@ -29,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import static com.myrobot.utils.Constant.JSON;
 
@@ -56,6 +57,12 @@ public class GuanLiYuanActivity extends BaseActivity {
             @Override
             public boolean handleMessage(Message msg) {
                 showToastor(msg.getData().getString("msg"));
+                Zu zu = (Zu) msg.getData().getSerializable("zu");
+                if (zu != null){
+                    news.clear();
+                    adapter.setCount(zu.getData());
+                    news.addAll(zu.getData());
+                }
 
 
                 if (progressDialog.isShowing()) {
@@ -66,7 +73,13 @@ public class GuanLiYuanActivity extends BaseActivity {
         });
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("加载中...");
-        client = new OkHttpClient();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//包含header、body数据
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client = new OkHttpClient.Builder().addInterceptor(loggingInterceptor).build();
+
+
+
         gs = new Gson();
         pager = findViewById(R.id.pager);
         yonghu_et = findViewById(R.id.yonghu_et);
@@ -156,7 +169,9 @@ public class GuanLiYuanActivity extends BaseActivity {
 
     private void addUser(final String url, final String json) {
         RequestBody body = RequestBody.create(JSON, json);
+
         Request request = new Request.Builder().addHeader("Accept", "*/*").url(url).post(body).build();
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -212,7 +227,7 @@ public class GuanLiYuanActivity extends BaseActivity {
                     if (zu.getCode() == 1) {
                         msg.arg1 = 1;
                         b.putString("msg", "查询成功");
-                        adapter.setCount(zu.getData());
+                        b.putSerializable("zu", zu);
                         //  adapter.notifyDataSetChanged();
                     } else {
                         msg.arg1 = 0;
