@@ -64,6 +64,7 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:focusable="true"
+                        android:inputType="phone"
                         android:textColor="@color/trout2"
                         android:id="@+id/yonghu_et" />
 

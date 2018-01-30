@@ -128,10 +128,11 @@ public class GuanLiYuanActivity extends BaseActivity {
             case R.id.queren_beizhu:
                 break;
             case R.id.zizhanghao:
-                url = "http://112.74.196.237:81/robot_api/public/index.php/api/" + user.getData().getId() + "/son";
+                url = "http://112.74.196.237:81/robot_api/public/index.php/users/" + user.getData().getId() + "/son";
                 String name = yonghu_et.getText().toString();
                 if (!name.trim().isEmpty()) {
                     jsonObject = new JsonObject();
+                    jsonObject.addProperty("phone", name);
                     jsonObject.addProperty("name", name);
                     jsonObject.addProperty("parent_id", user.getData().getId());
                     jsonObject.addProperty("fingerprint", String.valueOf(user.getData().getFingerprint()));
