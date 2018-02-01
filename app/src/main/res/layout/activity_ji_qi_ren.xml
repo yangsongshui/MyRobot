@@ -104,14 +104,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:splitMotionEvents="false"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="200dp"
+            android:splitMotionEvents="false"
             android:layout_marginEnd="200dp"
-
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -149,7 +150,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="200dp"
             android:layout_marginEnd="200dp"
-
+            android:splitMotionEvents="false"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">

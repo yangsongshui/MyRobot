@@ -65,7 +65,7 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
     String onoff = "1";
     String control = "1";
     Handler handler;
-
+    Runnable runnable;
     @Override
     protected int getContentView() {
         return R.layout.activity_ji_qi_ren;
@@ -74,6 +74,12 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void init() {
         handler = new Handler();
+        runnable=new Runnable() {
+            @Override
+            public void run() {
+                sendPortData(ComA, "[51000000000000@" + type + onoff + control + "000]");
+            }
+        };
         ComA = new SerialControl();
         DispQueue = new DispQueueThread();
         DispQueue.start();
@@ -107,56 +113,69 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
         dialogListen();
     }
 
+    private long lastClickTime;
+
+    private boolean isFastDoubleClick() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if (0 < timeD && timeD < 500) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
 
     @OnClick({R.id.lianwang_bt, R.id.shexiang_bt, R.id.zhuping_bt, R.id.yinxiang_bt, R.id.pingbi_bt, R.id.zhupin_bt, R.id.fenping_bt,
             R.id.touying_bt, R.id.kongqi_bt, R.id.fanhui_bt, R.id.home_bt})
     public void onViewClicked(View view) {
-        play();
-        switch (view.getId()) {
-            case R.id.lianwang_bt:
-                break;
-            case R.id.shexiang_bt:
-                type = "04";
-                dialog.show();
-                break;
-            case R.id.zhuping_bt:
-                type = "06";
+        if (isFastDoubleClick()) {
+            play();
+            switch (view.getId()) {
+                case R.id.lianwang_bt:
+                    break;
+                case R.id.shexiang_bt:
+                    type = "04";
+                    dialog.show();
+                    break;
+                case R.id.zhuping_bt:
+                    type = "06";
 
-                dialog.show();
-                break;
-            case R.id.yinxiang_bt:
-                type = "08";
-                volumeDialog.show();
-                break;
-            case R.id.pingbi_bt:
-                type = "07";
-                onOffDialog.show();
-                break;
-            case R.id.zhupin_bt:
-                type = "02";
-                onOffDialog.show();
-                break;
-            case R.id.fenping_bt:
-                type = "03";
-                onOffDialog.show();
-                break;
-            case R.id.touying_bt:
-                type = "05";
-                onOffDialog.show();
-                break;
-            case R.id.kongqi_bt:
-                //两侧配件
-                type = "07";
-                dialog.show();
-                break;
-            case R.id.fanhui_bt:
-                finish();
-                break;
-            case R.id.home_bt:
-                finish();
-                break;
-            default:
-                break;
+                    dialog.show();
+                    break;
+                case R.id.yinxiang_bt:
+                    type = "08";
+                    volumeDialog.show();
+                    break;
+                case R.id.pingbi_bt:
+                    type = "07";
+                    onOffDialog.show();
+                    break;
+                case R.id.zhupin_bt:
+                    type = "02";
+                    onOffDialog.show();
+                    break;
+                case R.id.fenping_bt:
+                    type = "03";
+                    onOffDialog.show();
+                    break;
+                case R.id.touying_bt:
+                    type = "05";
+                    onOffDialog.show();
+                    break;
+                case R.id.kongqi_bt:
+                    //两侧配件
+                    type = "07";
+                    dialog.show();
+                    break;
+                case R.id.fanhui_bt:
+                    finish();
+                    break;
+                case R.id.home_bt:
+                    finish();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -174,7 +193,6 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
     public boolean onTouch(View v, MotionEvent event) {
         int time = 500;
         switch (v.getId()) {
-
             case R.id.shang_bt:
                 control = "1";
                 break;
@@ -199,6 +217,10 @@ public class JiQiRenActivity extends BaseActivity implements View.OnClickListene
                 onoff = "0";
                 control = "0";
                 Log.e("TAG", "ACTION_UP");
+                handler.postDelayed(runnable, 500);
+                handler.postDelayed(runnable, 1300);
+                handler.postDelayed(runnable, 1600);
+                handler.postDelayed(runnable, 2000);
                 break;
         }
 
