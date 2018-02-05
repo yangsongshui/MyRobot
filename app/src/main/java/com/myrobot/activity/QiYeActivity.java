@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.myrobot.OnItemCheckListener;
@@ -18,6 +19,7 @@ import com.myrobot.R;
 import com.myrobot.adapter.PageAdapter;
 import com.myrobot.adapter.PageAdapter2;
 import com.myrobot.api.Page;
+import com.myrobot.app.MyApplication;
 import com.myrobot.base.BaseActivity;
 
 import java.io.IOException;
@@ -40,6 +42,10 @@ public class QiYeActivity extends BaseActivity {
     RecyclerView listView;
     @BindView(R.id.qiye_rv)
     RecyclerView qiye_rv;
+    @BindView(R.id.name_tv)
+    TextView nameTv;
+    @BindView(R.id.type_tv)
+    TextView typeTv;
     OkHttpClient client;
     Gson gs;
     Handler handler;
@@ -94,7 +100,10 @@ public class QiYeActivity extends BaseActivity {
             }
         });
         postPage("http://112.74.196.237:81/robot_api/public/index.php/api/30/files?key=");
-
+        String name = MyApplication.newInstance().getUser().getData().getName();
+        nameTv.setText(name != null ? name : "");
+        String type = String.valueOf(MyApplication.newInstance().getUser().getData().getDepartment_name());
+        typeTv.setText(type != null ? type : "");
     }
 
     private void getData(List<Page.DataBean> data) {
